@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">HCIResearchProjectApp</string>
+    <string name="welcome_Text">Welcome!</string>
+    <string name="explanatory_Text">Please await instructions from a facilitator</string>
+    <string name="start">Start</string>
+    <string name="Continue">Continue</string>
+    <string name="finish">Finish</string>
+    <string name="training_Task">Training Task</string>
+    <string name="relaxing_Phase">Relaxation phase</string>
+    <string name="task1">Task 1</string>
+    <string name="task2">Task 2</string>
+    <string name="task3">Task 3</string>
+    <string name="task4">Task 4</string>
+</resources>
