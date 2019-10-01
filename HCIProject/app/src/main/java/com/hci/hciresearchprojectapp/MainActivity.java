@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent TrainingTaskIntent = new Intent(MainActivity.this, TrainingActivity.class);
                 startActivity(TrainingTaskIntent);
+                finish();
             }
         });
     }

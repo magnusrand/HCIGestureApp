@@ -3,6 +3,7 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,8 +32,9 @@ public class Task1Activity extends AppCompatActivity {
         continueFromTask1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(Task1Activity.this, RelaxNResetActivity.class);
-                startActivityForResult(continueToCalmPhaseIntent, REQ_Task1ToCalm);
+                Intent continueToCalmPhaseIntent = new Intent(Task1Activity.this, RelaxNResetActivity.class)
+                        .putExtra("RequestCode", REQ_Task1ToCalm);
+                startActivity(continueToCalmPhaseIntent);
             }
         });
     }

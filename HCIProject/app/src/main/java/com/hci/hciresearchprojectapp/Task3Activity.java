@@ -3,6 +3,7 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class Task3Activity extends AppCompatActivity {
-    private static final int REQ_Task3ToCalm = 113;
+    private static final int REQ_Task3ToCalm = 114;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,9 @@ public class Task3Activity extends AppCompatActivity {
         continueFromTask1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(Task3Activity.this, RelaxNResetActivity.class);
-                startActivityForResult(continueToCalmPhaseIntent, REQ_Task3ToCalm);
+                Intent continueToCalmPhaseIntent = new Intent(Task3Activity.this, RelaxNResetActivity.class)
+                                        .putExtra("RequestCode", REQ_Task3ToCalm);
+                startActivity(continueToCalmPhaseIntent);
             }
         });
     }

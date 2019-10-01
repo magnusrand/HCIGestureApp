@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task2TxtInput"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.473" />
 
     <TextView
         android:id="@+id/task2TitleTxt"
@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.061" />
 
     <TextView
         android:id="@+id/task2Txt"
@@ -52,16 +52,16 @@
         android:layout_height="59dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task2Txt"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.139" />
 
     <Button
         android:id="@+id/continueFromTask2Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

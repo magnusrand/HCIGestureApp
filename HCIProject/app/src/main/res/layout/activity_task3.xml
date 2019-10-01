@@ -12,11 +12,12 @@
         android:layout_width="119dp"
         android:layout_height="92dp"
         android:layout_marginBottom="60dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintBottom_toTopOf="@+id/continueFromTask3Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task2TxtInput"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintTop_toTopOf="@+id/task3TxtInput"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/task3TitleTxt"
@@ -26,12 +27,12 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="@+id/task3Timer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/task3Txt"
@@ -40,23 +41,22 @@
         android:text="Insert task 3 text"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/task3TxtInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task3TitleTxt"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.647" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/task3TxtInput"
         android:layout_width="281dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="336dp"
+        android:layout_marginBottom="272dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task2Txt"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/continueFromTask3Btn"

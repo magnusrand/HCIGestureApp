@@ -3,6 +3,7 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,7 @@ public class TrainingActivity extends AppCompatActivity {
         Button continueBtn = findViewById(R.id.ContinueFromTrainingBtn);
         ProgressBar timer = findViewById(R.id.Timer);
 
-        timer.setProgress(120);
+        timer.setMax(120);
 
         trainingTxt.setText("Adebe D. A.\n" +
                 "I come from the land of\n" +
@@ -43,8 +44,10 @@ public class TrainingActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(TrainingActivity.this, RelaxNResetActivity.class);
-                startActivityForResult(continueToCalmPhaseIntent, REQ_TrainingToCalm);
+                Intent continueToCalmPhaseIntent = new Intent(TrainingActivity.this, RelaxNResetActivity.class)
+                        .putExtra("RequestCode", REQ_TrainingToCalm);
+                startActivity(continueToCalmPhaseIntent);
+                finish();
             }
         });
     }
