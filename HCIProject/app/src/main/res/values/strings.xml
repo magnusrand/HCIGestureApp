@@ -11,4 +11,5 @@
     <string name="task2">Task 2</string>
     <string name="task3">Task 3</string>
     <string name="task4">Task 4</string>
+    <string name="relaxingImgContentDescription">Relaxing image, to help the user calm down</string>
 </resources>

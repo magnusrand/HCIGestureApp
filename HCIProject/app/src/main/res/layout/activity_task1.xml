@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Task1Activity">
 
-    <ProgressBar
-        android:id="@+id/task1Timer"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="119dp"
-        android:layout_height="92dp"
-        android:layout_marginBottom="68dp"
-        app:layout_constraintBottom_toTopOf="@+id/continueFromTrainingBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task1TxtInput"
-        app:layout_constraintVertical_bias="1.0" />
-
     <TextView
         android:id="@+id/task1TitleTxt"
         android:layout_width="290dp"
@@ -28,9 +16,10 @@
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.061" />
 
     <TextView
         android:id="@+id/task1Txt"
@@ -41,7 +30,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task1TitleTxt"
         app:layout_constraintVertical_bias="0.097" />
@@ -52,21 +41,46 @@
         android:layout_height="59dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task1Txt"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.139" />
 
     <Button
         android:id="@+id/continueFromTask1Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
         android:text="@string/Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task1Txt"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintVertical_bias="0.955" />
+
+    <TextView
+        android:id="@+id/task1Timer"
+        android:layout_width="101dp"
+        android:layout_height="30dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/continueFromTask1Btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task1TxtInput" />
+
+    <Button
+        android:id="@+id/startTask1TimerBtn"
+        android:layout_width="76dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/start"
+        app:layout_constraintBottom_toTopOf="@+id/continueFromTask1Btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toEndOf="@+id/task1Timer"
+        app:layout_constraintTop_toBottomOf="@+id/task1TxtInput"
+        app:layout_constraintVertical_bias="0.494" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

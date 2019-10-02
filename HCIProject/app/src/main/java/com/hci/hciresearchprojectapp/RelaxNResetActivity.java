@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.Console;
 import java.util.concurrent.ExecutionException;
@@ -20,14 +22,44 @@ public class RelaxNResetActivity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
     private static final int REQ_Task2ToCalm = 113;
     private static final int REQ_Task3ToCalm = 114;
+    TextView relaxTimer;
+    long startTime = 0;
 
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable= new Runnable() {
+        @Override
+        public void run() {
+            long milliseconds = System.currentTimeMillis() - startTime;
+            int seconds = (int) milliseconds/1000;
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            relaxTimer.setText(String.format("%d:%02d",minutes,seconds));
+            timerHandler.postDelayed(this, 500);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relax_nreset);
 
-        ProgressBar RelaxTimer = findViewById(R.id.relaxTimer);
-        RelaxTimer.setMax(60);
+        relaxTimer = findViewById(R.id.relaxTimer);
+        Button startTimerBtn = findViewById(R.id.startRelaxTimerBtn);
+        startTimerBtn.setText("start");
+        startTimerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button btn = (Button) v;
+                if(btn.getText().equals("stop")){
+                    timerHandler.removeCallbacks(timerRunnable);
+                    btn.setText("start");
+                } else {
+                    startTime = System.currentTimeMillis();
+                    timerHandler.postDelayed(timerRunnable, 0);
+                    btn.setText("stop");
+                }
+            }
+        });
 
         ImageView RelaxingImgs = findViewById(R.id.relaxingImg); //Maybe update imgs displayed if even needed.
         Button nextPhaseBtn = findViewById(R.id.nextPhaseBtn);
@@ -73,4 +105,14 @@ public class RelaxNResetActivity extends AppCompatActivity {
             });
         }
         }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        timerHandler.removeCallbacks(timerRunnable);
+        Button btn = (Button)findViewById(R.id.startTask1TimerBtn);
+        if(btn != null) {
+            btn.setText("start");
+        }
+    }
     }

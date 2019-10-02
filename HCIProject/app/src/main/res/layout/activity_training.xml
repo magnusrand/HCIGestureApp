@@ -58,14 +58,27 @@
         app:layout_constraintTop_toBottomOf="@+id/TrainingTxtInput"
         app:layout_constraintVertical_bias="0.794" />
 
-    <ProgressBar
-        android:id="@+id/Timer"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="119dp"
-        android:layout_height="92dp"
+    <TextView
+        android:id="@+id/trainingTaskTimer"
+        android:layout_width="101dp"
+        android:layout_height="30dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ContinueFromTrainingBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TrainingTxtInput" />
 
+    <Button
+        android:id="@+id/startTrainingTaskTimerBtn"
+        android:layout_width="76dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/start"
+        app:layout_constraintBottom_toTopOf="@+id/ContinueFromTrainingBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toEndOf="@+id/trainingTaskTimer"
+        app:layout_constraintTop_toBottomOf="@+id/TrainingTxtInput"
+        app:layout_constraintVertical_bias="0.494" />
 </androidx.constraintlayout.widget.ConstraintLayout>
