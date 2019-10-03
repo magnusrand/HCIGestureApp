@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 public class TrainingActivity extends AppCompatActivity {
     private static final int REQ_TrainingToCalm = 111;
     TextView trainingTaskTimer;
+    Button continueBtn;
     long startTime = 0;
 
     Handler timerHandler = new Handler();
@@ -30,6 +34,7 @@ public class TrainingActivity extends AppCompatActivity {
 
             trainingTaskTimer.setText(String.format("%d:%02d",minutes,seconds));
             timerHandler.postDelayed(this, 500);
+
         }
     };
     @SuppressLint("SetTextI18n")
@@ -38,28 +43,33 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        MultiAutoCompleteTextView trainingTxtInput = findViewById(R.id.TrainingTxtInput);
+        final MultiAutoCompleteTextView trainingTxtInput = findViewById(R.id.TrainingTxtInput);
         trainingTxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
         TextView trainingTxt = findViewById(R.id.trainingTxt);
-        Button continueBtn = findViewById(R.id.ContinueFromTrainingBtn);
+        continueBtn = findViewById(R.id.ContinueFromTrainingBtn);
         trainingTaskTimer = findViewById(R.id.trainingTaskTimer);
         Button startTimerBtn = findViewById(R.id.startTrainingTaskTimerBtn);
         startTimerBtn.setText("start");
         startTimerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Button btn = (Button) v;
-                if(btn.getText().equals("stop")){
-                    timerHandler.removeCallbacks(timerRunnable);
-                    btn.setText("start");
-                } else {
+            public void onClick(final View v) {
+                    Button btn = (Button)v;
+                    trainingTxtInput.setVisibility(View.VISIBLE);
                     startTime = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnable, 0);
-                    btn.setText("stop");
+                    btn.setVisibility(View.INVISIBLE);
+                    timerHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            timerHandler.removeCallbacks(timerRunnable);
+                            closeKeyboard();
+                            trainingTxtInput.setVisibility(View.INVISIBLE);
+                            continueBtn.setVisibility(View.VISIBLE);
+                        }
+                    }, 11000); //set correct time here
                 }
-            }
         });
 
         trainingTxt.setText("Adebe D. A.\n" +
@@ -86,6 +96,14 @@ public class TrainingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override

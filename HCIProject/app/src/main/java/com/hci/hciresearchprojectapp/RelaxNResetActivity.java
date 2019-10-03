@@ -23,6 +23,8 @@ public class RelaxNResetActivity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
     private static final int REQ_Task3ToCalm = 114;
     TextView relaxTimer;
+    Button nextPhaseBtn;
+    ImageView relaxingImgView;
     long startTime = 0;
 
     Handler timerHandler = new Handler();
@@ -49,20 +51,25 @@ public class RelaxNResetActivity extends AppCompatActivity {
         startTimerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button btn = (Button) v;
-                if(btn.getText().equals("stop")){
-                    timerHandler.removeCallbacks(timerRunnable);
-                    btn.setText("start");
-                } else {
-                    startTime = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, 0);
-                    btn.setText("stop");
-                }
+                Button btn = (Button)v;
+                relaxingImgView = findViewById(R.id.relaxingImg);
+                relaxingImgView.setVisibility(View.VISIBLE);
+                startTime = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, 0);
+                btn.setVisibility(View.INVISIBLE);
+                timerHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        timerHandler.removeCallbacks(timerRunnable);
+                        relaxingImgView.setVisibility(View.INVISIBLE);
+                        nextPhaseBtn.setVisibility(View.VISIBLE);
+                    }
+                }, 11000); //set correct time here
             }
         });
 
-        ImageView RelaxingImgs = findViewById(R.id.relaxingImg); //Maybe update imgs displayed if even needed.
-        Button nextPhaseBtn = findViewById(R.id.nextPhaseBtn);
+        relaxingImgView = findViewById(R.id.relaxingImg); //Maybe update imgs displayed if even needed.
+        nextPhaseBtn = findViewById(R.id.nextPhaseBtn);
         int requestCode = getIntent().getExtras().getInt("RequestCode");
         if(requestCode == REQ_TrainingToCalm) {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {

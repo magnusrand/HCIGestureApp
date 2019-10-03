@@ -30,24 +30,25 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TitleTxt"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/TrainingTxtInput"
+        android:visibility="invisible"
         android:layout_width="281dp"
         android:layout_height="59dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainingTxt"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.217" />
 
     <Button
         android:id="@+id/ContinueFromTrainingBtn"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Continue"
@@ -60,25 +61,27 @@
 
     <TextView
         android:id="@+id/trainingTaskTimer"
-        android:layout_width="101dp"
-        android:layout_height="30dp"
+        android:layout_width="134dp"
+        android:layout_height="61dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ContinueFromTrainingBtn"
+        app:layout_constraintBottom_toTopOf="@+id/trainingTxt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TrainingTxtInput" />
+        app:layout_constraintTop_toBottomOf="@+id/TitleTxt"
+        app:layout_constraintVertical_bias="0.445" />
 
     <Button
         android:id="@+id/startTrainingTaskTimerBtn"
         android:layout_width="76dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
         android:text="@string/start"
         app:layout_constraintBottom_toTopOf="@+id/ContinueFromTrainingBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
-        app:layout_constraintStart_toEndOf="@+id/trainingTaskTimer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TrainingTxtInput"
         app:layout_constraintVertical_bias="0.494" />
 </androidx.constraintlayout.widget.ConstraintLayout>

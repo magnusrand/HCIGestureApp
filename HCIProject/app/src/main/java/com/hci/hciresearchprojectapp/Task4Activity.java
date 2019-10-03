@@ -3,11 +3,13 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 public class Task4Activity extends AppCompatActivity {
     TextView task4Timer;
+    Button continueFromTask4Btn;
     long startTime = 0;
 
     Handler timerHandler = new Handler();
@@ -36,7 +39,7 @@ public class Task4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task4);
 
-        MultiAutoCompleteTextView task4TxtInput = findViewById(R.id.task4TxtInput);
+        final MultiAutoCompleteTextView task4TxtInput = findViewById(R.id.task4TxtInput);
         task4TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
@@ -51,20 +54,25 @@ public class Task4Activity extends AppCompatActivity {
         startTimerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button btn = (Button) v;
-                if(btn.getText().equals("stop")){
-                    timerHandler.removeCallbacks(timerRunnable);
-                    btn.setText("start");
-                } else {
-                    startTime = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, 0);
-                    btn.setText("stop");
-                }
+                Button btn = (Button)v;
+                task4TxtInput.setVisibility(View.VISIBLE);
+                startTime = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, 0);
+                btn.setVisibility(View.INVISIBLE);
+                timerHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        timerHandler.removeCallbacks(timerRunnable);
+                        closeKeyboard();
+                        task4TxtInput.setVisibility(View.INVISIBLE);
+                        continueFromTask4Btn.setVisibility(View.VISIBLE);
+                    }
+                }, 11000); //set correct time here
             }
         });
 
-        Button continueFromTask1Btn = findViewById(R.id.continueFromTask4Btn);
-        continueFromTask1Btn.setOnClickListener(new View.OnClickListener() {
+        continueFromTask4Btn = findViewById(R.id.continueFromTask4Btn);
+        continueFromTask4Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent endTestIntent = new Intent(Task4Activity.this, MainActivity.class);
@@ -74,6 +82,13 @@ public class Task4Activity extends AppCompatActivity {
         });
     }
 
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
     @Override
     public void onPause() {
         super.onPause();
