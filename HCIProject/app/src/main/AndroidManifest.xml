@@ -15,6 +15,7 @@
         <activity android:name=".Task1Activity" />
         <activity android:name=".RelaxNResetActivity" />
         <activity android:name=".TrainingActivity" />
+        <activity android:name=".Timer" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
