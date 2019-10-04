@@ -1,11 +1,6 @@
 package com.hci.hciresearchprojectapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,15 +12,20 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
-import android.widget.ProgressBar;
-import android.widget.Scroller;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task1Activity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
     TextView task1Timer;
+    TextView task1Text;
     Button continueFromTask1Btn;
     long endtime = 0;
+
+    String tempTextTest = "a";
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
@@ -51,7 +51,7 @@ public class Task1Activity extends AppCompatActivity {
         task1TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        final TextView task1Text = findViewById(R.id.task1Txt);
+        task1Text = findViewById(R.id.task1Txt);
 
         task1Text.setMovementMethod(new ScrollingMovementMethod());
         task1Text.setText("JANUARY\n" +
@@ -91,6 +91,24 @@ public class Task1Activity extends AppCompatActivity {
                 startActivity(continueToCalmPhaseIntent);
             }
         });
+
+        //createRandomTimerInSeconds(5,10).start();
+    }
+
+    public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
+        final int seconds = minSeconds + (int) (Math.random() * maxSeconds);
+        return new CountDownTimer(seconds*1000,1000) {
+            int displayCounter = seconds;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTickUpdateEvent(displayCounter);
+                displayCounter--;
+            }
+            @Override
+            public void onFinish() {
+                // TODO create notification method here
+            }
+        };
     }
 
     private void closeKeyboard() {

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task4Activity extends AppCompatActivity {
     TextView task4Timer;
@@ -83,6 +86,24 @@ public class Task4Activity extends AppCompatActivity {
                 finish();
             }
         });
+        // Todo uncomment below to make timer start
+        //createRandomTimerInSeconds(5,10).start();
+    }
+
+    public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
+        final int seconds = minSeconds + (int) (Math.random() * maxSeconds);
+        return new CountDownTimer(seconds*1000,1000) {
+            int displayCounter = seconds;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTickUpdateEvent(displayCounter);
+                displayCounter--;
+            }
+            @Override
+            public void onFinish() {
+                // TODO create notification method here
+            }
+        };
     }
 
     private void closeKeyboard() {
