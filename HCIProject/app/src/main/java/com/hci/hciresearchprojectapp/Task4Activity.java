@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -18,13 +19,13 @@ import android.widget.TextView;
 public class Task4Activity extends AppCompatActivity {
     TextView task4Timer;
     Button continueFromTask4Btn;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -43,8 +44,10 @@ public class Task4Activity extends AppCompatActivity {
         task4TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task1Text = findViewById(R.id.task4Txt);
-        task1Text.setText("I was in fire,\n" +
+        TextView task4Text = findViewById(R.id.task4Txt);
+
+        task4Text.setMovementMethod(new ScrollingMovementMethod());
+        task4Text.setText("I was in fire,\n" +
                 "The room was dark and somber.\n" +
                 "I sleep peacefully\n"); //Insert Task 4 text
 
@@ -56,7 +59,7 @@ public class Task4Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task4TxtInput.setVisibility(View.VISIBLE);
-                startTime = System.currentTimeMillis();
+                endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {

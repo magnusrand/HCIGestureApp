@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,13 +21,13 @@ public class Task3Activity extends AppCompatActivity {
     private static final int REQ_Task3ToCalm = 114;
     TextView task3Timer;
     Button continueFromTask3Btn;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -45,11 +46,12 @@ public class Task3Activity extends AppCompatActivity {
         task3TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task1Text = findViewById(R.id.task3Txt);
-        task1Text.setText("The chill, worming in\n" +
+        TextView task3Text = findViewById(R.id.task3Txt);
+        task3Text.setText("The chill, worming in\n" +
                 "Shock, pleasure, bursting within\n" +
                 "Summer tongue awakes\n"); //Insert Task 3 text
 
+        task3Text.setMovementMethod(new ScrollingMovementMethod());
         task3Timer = findViewById(R.id.task3Timer);
         Button startTimerBtn = findViewById(R.id.startTask3TimerBtn);
         startTimerBtn.setText("start");
@@ -58,7 +60,7 @@ public class Task3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task3TxtInput.setVisibility(View.VISIBLE);
-                startTime = System.currentTimeMillis();
+                endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {

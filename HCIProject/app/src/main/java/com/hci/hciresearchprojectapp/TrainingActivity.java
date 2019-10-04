@@ -10,6 +10,7 @@ import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -21,13 +22,13 @@ public class TrainingActivity extends AppCompatActivity {
     private static final int REQ_TrainingToCalm = 111;
     TextView trainingTaskTimer;
     Button continueBtn;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -57,7 +58,7 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(final View v) {
                     Button btn = (Button)v;
                     trainingTxtInput.setVisibility(View.VISIBLE);
-                    startTime = System.currentTimeMillis();
+                    endtime = System.currentTimeMillis() + 121000;
                     timerHandler.postDelayed(timerRunnable, 0);
                     btn.setVisibility(View.INVISIBLE);
                     timerHandler.postDelayed(new Runnable() {
@@ -68,10 +69,11 @@ public class TrainingActivity extends AppCompatActivity {
                             trainingTxtInput.setVisibility(View.INVISIBLE);
                             continueBtn.setVisibility(View.VISIBLE);
                         }
-                    }, 11000); //set correct time here
+                    }, 2000); //set correct time here
                 }
         });
 
+        trainingTxt.setMovementMethod(new ScrollingMovementMethod());
         trainingTxt.setText("Adebe D. A.\n" +
                 "I come from the land of\n" +
                 "\n" +

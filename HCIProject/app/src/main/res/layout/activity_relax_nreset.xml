@@ -18,26 +18,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <ImageView
         android:id="@+id/relaxingImg"
-        android:layout_width="290dp"
-        android:layout_height="222dp"
+        android:layout_width="400dp"
+        android:layout_height="280dp"
         android:contentDescription="@string/relaxingImgContentDescription"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.674"
         app:srcCompat="@mipmap/relaxingimg_runningwater" />
 
     <Button
         android:id="@+id/nextPhaseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/Continue"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,9 +55,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/relaxingImg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTxt"
-        app:layout_constraintVertical_bias="0.479" />
+        app:layout_constraintVertical_bias="0.72" />
 
     <Button
         android:id="@+id/startRelaxTimerBtn"

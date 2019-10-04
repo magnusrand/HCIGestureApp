@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,13 +21,13 @@ public class Task2Activity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
     TextView task2Timer;
     Button continueFromTask2Btn;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -45,8 +46,10 @@ public class Task2Activity extends AppCompatActivity {
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task1Text = findViewById(R.id.task2Txt);
-        task1Text.setText("Like crunchy cornflakes\n" +
+        TextView task2Text = findViewById(R.id.task2Txt);
+
+        task2Text.setMovementMethod(new ScrollingMovementMethod());
+        task2Text.setText("Like crunchy cornflakes\n" +
                 "Gold leaves rustle underfoot\n" +
                 "Beauty in decay.\n"); //Insert Task 2 text
 
@@ -59,7 +62,7 @@ public class Task2Activity extends AppCompatActivity {
                 Button btn = (Button)v;
 
                 task2TxtInput.setVisibility(View.VISIBLE);
-                startTime = System.currentTimeMillis();
+                endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {

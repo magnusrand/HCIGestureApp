@@ -25,13 +25,13 @@ public class RelaxNResetActivity extends AppCompatActivity {
     TextView relaxTimer;
     Button nextPhaseBtn;
     ImageView relaxingImgView;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -54,7 +54,7 @@ public class RelaxNResetActivity extends AppCompatActivity {
                 Button btn = (Button)v;
                 relaxingImgView = findViewById(R.id.relaxingImg);
                 relaxingImgView.setVisibility(View.VISIBLE);
-                startTime = System.currentTimeMillis();
+                endtime = System.currentTimeMillis() + 61000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {
@@ -64,7 +64,7 @@ public class RelaxNResetActivity extends AppCompatActivity {
                         relaxingImgView.setVisibility(View.INVISIBLE);
                         nextPhaseBtn.setVisibility(View.VISIBLE);
                     }
-                }, 11000); //set correct time here
+                }, 2000); //set correct time here
             }
         });
 

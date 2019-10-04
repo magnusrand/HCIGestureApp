@@ -12,24 +12,26 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
+import android.widget.Scroller;
 import android.widget.TextView;
 
 public class Task1Activity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
     TextView task1Timer;
     Button continueFromTask1Btn;
-    long startTime = 0;
+    long endtime = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
         public void run() {
-            long milliseconds = System.currentTimeMillis() - startTime;
+            long milliseconds = endtime - System.currentTimeMillis();
             int seconds = (int) milliseconds/1000;
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -50,6 +52,8 @@ public class Task1Activity extends AppCompatActivity {
         //Do some handling with the txt input
 
         final TextView task1Text = findViewById(R.id.task1Txt);
+
+        task1Text.setMovementMethod(new ScrollingMovementMethod());
         task1Text.setText("JANUARY\n" +
                 "Delightful display\n" +
                 "Snowdrops bow their pure white heads\n" +
@@ -63,7 +67,7 @@ public class Task1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task1TxtInput.setVisibility(View.VISIBLE);
-                startTime = System.currentTimeMillis();
+                endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {

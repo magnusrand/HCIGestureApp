@@ -26,6 +26,7 @@
         android:layout_width="350dp"
         android:layout_height="145dp"
         android:text="Insert task 2 text"
+        android:scrollbars="vertical"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
