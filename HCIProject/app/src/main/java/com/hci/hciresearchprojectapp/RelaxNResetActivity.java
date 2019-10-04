@@ -3,7 +3,9 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -55,6 +57,9 @@ public class RelaxNResetActivity extends AppCompatActivity {
                 relaxingImgView = findViewById(R.id.relaxingImg);
                 relaxingImgView.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 61000;
+                int rawMusic = R.raw.tranquility;
+                final MediaPlayer voice = MediaPlayer.create(RelaxNResetActivity.this, rawMusic);
+                voice.start();
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {
@@ -63,6 +68,7 @@ public class RelaxNResetActivity extends AppCompatActivity {
                         timerHandler.removeCallbacks(timerRunnable);
                         relaxingImgView.setVisibility(View.INVISIBLE);
                         nextPhaseBtn.setVisibility(View.VISIBLE);
+                        voice.stop();
                     }
                 }, 2000); //set correct time here
             }
@@ -70,6 +76,9 @@ public class RelaxNResetActivity extends AppCompatActivity {
 
         relaxingImgView = findViewById(R.id.relaxingImg); //Maybe update imgs displayed if even needed.
         nextPhaseBtn = findViewById(R.id.nextPhaseBtn);
+
+
+
         int requestCode = getIntent().getExtras().getInt("RequestCode");
         if(requestCode == REQ_TrainingToCalm) {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {

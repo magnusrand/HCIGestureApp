@@ -64,8 +64,9 @@
 
     <TextView
         android:id="@+id/task4Timer"
-        android:layout_width="125dp"
-        android:layout_height="53dp"
+        android:layout_width="114dp"
+        android:layout_height="67dp"
+        android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
         android:textStyle="bold"
