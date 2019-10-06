@@ -54,10 +54,36 @@ public class Task1Activity extends AppCompatActivity {
         task1Text = findViewById(R.id.task1Txt);
 
         task1Text.setMovementMethod(new ScrollingMovementMethod());
-        task1Text.setText("JANUARY\n" +
-                "Delightful display\n" +
-                "Snowdrops bow their pure white heads\n" +
-                "To the sun's glory."); //Insert Task 1 text
+        task1Text.setText("question that must be answered\n\n" +
+                "beware the ides of March\n\n" +
+                "double double toil and trouble\n\n" +
+                "the power of denial\n\n" +
+                "I agree with you\n\n" +
+                "do not say anything\n\n" +
+                "play it again Sam\n\n" +
+                "the force is with you\n\n" +
+                "you are not a jedi yet\n\n" +
+                "an offer you cannot refuse\n\n" +
+                "are you talking to me\n\n" +
+                "yes you are very smart\n\n" +
+                "all work and no play\n\n" +
+                "hair gel is very greasy\n\n" +
+                "Valium in the economy size\n\n" +
+                "the facts get in the way\n\n" +
+                "the dreamers of dreams\n\n" +
+                "did you have a good time\n\n" +
+                "space is a high priority\n\n" +
+                "you are a wonderful example\n\n" +
+                "do not squander your time\n\n" +
+                "do not drink too much\n\n" +
+                "take a coffee break\n\n" +
+                "popularity is desired by all\n\n" +
+                "the music is better than it sounds\n\n" +
+                "starlight and dewdrop\n\n" +
+                "the living is easy\n\n" +
+                "fish are jumping\n\n" +
+                "the cotton is high\n\n" +
+                "drove my chevy to the levee"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
 
         task1Timer = findViewById(R.id.task1Timer);
         Button startTimerBtn = findViewById(R.id.startTask1TimerBtn);
@@ -67,6 +93,7 @@ public class Task1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task1TxtInput.setVisibility(View.VISIBLE);
+                task1Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
@@ -78,7 +105,7 @@ public class Task1Activity extends AppCompatActivity {
                         task1TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask1Btn.setVisibility(View.VISIBLE);
                     }
-                }, 11000); //set correct time here
+                }, 2000); //set correct time here
             }
         });
 

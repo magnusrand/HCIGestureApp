@@ -36,6 +36,7 @@
 
     <Button
         android:id="@+id/nextPhaseBtn"
+        android:background="@android:color/holo_green_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -64,6 +65,7 @@
         android:id="@+id/startRelaxTimerBtn"
         android:layout_width="76dp"
         android:layout_height="48dp"
+        android:background="@android:color/holo_green_light"
         android:text="@string/start"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/nextPhaseBtn"

@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class TrainingActivity extends AppCompatActivity {
     private static final int REQ_TrainingToCalm = 111;
     TextView trainingTaskTimer;
+    TextView trainingTxt;
     Button continueBtn;
     long endtime = 0;
 
@@ -48,7 +49,7 @@ public class TrainingActivity extends AppCompatActivity {
         trainingTxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView trainingTxt = findViewById(R.id.trainingTxt);
+        trainingTxt = findViewById(R.id.trainingTxt);
         continueBtn = findViewById(R.id.ContinueFromTrainingBtn);
         trainingTaskTimer = findViewById(R.id.trainingTaskTimer);
         Button startTimerBtn = findViewById(R.id.startTrainingTaskTimerBtn);
@@ -58,6 +59,7 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(final View v) {
                     Button btn = (Button)v;
                     trainingTxtInput.setVisibility(View.VISIBLE);
+                    trainingTxt.setVisibility(View.VISIBLE);
                     endtime = System.currentTimeMillis() + 121000;
                     timerHandler.postDelayed(timerRunnable, 0);
                     btn.setVisibility(View.INVISIBLE);
@@ -74,20 +76,35 @@ public class TrainingActivity extends AppCompatActivity {
         });
 
         trainingTxt.setMovementMethod(new ScrollingMovementMethod());
-        trainingTxt.setText("Adebe D. A.\n" +
-                "I come from the land of\n" +
-                "\n" +
-                "Where You From?\n" +
-                "\n" +
-                "My people dispossessed of their stories\n" +
-                "\n" +
-                "and who have died again and again\n" +
-                "\n" +
-                "in a minstrelsy of afterlives, wakes,\n" +
-                "\n" +
-                "the dead who walk, waiting and\n" +
-                "\n" +
-                "furrowed, like ivy crawling up"); //Insert training text here
+        trainingTxt.setText("my watch fell in the water\n\n" +
+                "prevailing wind from the east\n\n" +
+                "never too rich and never too thin\n\n" +
+                "breathing is difficult\n\n" +
+                "I can see the rings on Saturn\n\n" +
+                "physics and chemistry are hard\n\n" +
+                "my bank account is overdrawn\n\n" +
+                "elections bring out the best\n\n" +
+                "we are having spaghetti\n\n" +
+                "time to go shopping\n\n" +
+                "a problem with the engine\n\n" +
+                "elephants are afraid of mice\n\n" +
+                "my favorite place to visit\n\n" +
+                "three two one zero blast off\n\n" +
+                "my favorite subject is psychology\n\n" +
+                "circumstances are unacceptable\n\n" +
+                "watch out for low flying objects\n\n" +
+                "if at first you do not succeed\n\n" +
+                "please provide your date of birth\n\n" +
+                "we run the risk of failure\n\n" +
+                "prayer in schools offends some\n\n" +
+                "he is just like everyone else\n\n" +
+                "great disturbance in the force\n\n" +
+                "love means many things\n\n" +
+                "you must be getting old\n\n" +
+                "the world is a stage\n\n" +
+                "can I skate with sister today\n\n" +
+                "neither a borrower nor a lender be\n\n" +
+                "one heck of a question"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,6 +21,7 @@ import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task4Activity extends AppCompatActivity {
     TextView task4Timer;
+    TextView task4Text;
     Button continueFromTask4Btn;
     long endtime = 0;
 
@@ -47,12 +48,40 @@ public class Task4Activity extends AppCompatActivity {
         task4TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task4Text = findViewById(R.id.task4Txt);
+        task4Text = findViewById(R.id.task4Txt);
 
         task4Text.setMovementMethod(new ScrollingMovementMethod());
-        task4Text.setText("I was in fire,\n" +
-                "The room was dark and somber.\n" +
-                "I sleep peacefully\n"); //Insert Task 4 text
+        task4Text.setText("healthy food is good for you\n\n" +
+                "hands on experience with a job\n\n" +
+                "this watch is too expensive\n\n" +
+                "the postal service is very slow\n\n" +
+                "communicate through email\n\n" +
+                "the capital of our nation\n\n" +
+                "travel at the speed of light\n\n" +
+                "I do not fully agree with you\n\n" +
+                "gas bills are sent monthly\n\n" +
+                "earth quakes are predictable\n\n" +
+                "life is but a dream\n\n" +
+                "take it to the recycling depot\n\n" +
+                "sent this by registered mail\n\n" +
+                "fall is my favorite season\n\n" +
+                "a fox is a very smart animal\n\n" +
+                "the kids are very excited\n\n" +
+                "parking lot is full of trucks\n\n" +
+                "my bike has a flat tire\n\n" +
+                "do not walk too quickly\n\n" +
+                "a duck quacks to ask for food\n\n" +
+                "limited warranty of two years\n\n" +
+                "the four seasons will come\n\n" +
+                "the sun rises in the east\n\n" +
+                "it is very windy today\n\n" +
+                "do not worry about this\n\n" +
+                "dashing through the snow\n\n" +
+                "want to join us for lunch\n\n" +
+                "stay away from strangers\n\n" +
+                "accompanied by an adult\n\n" +
+                "see you later alligator\n\n" +
+                "make my day you sucker"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
 
         task4Timer = findViewById(R.id.task4Timer);
         Button startTimerBtn = findViewById(R.id.startTask4TimerBtn);
@@ -62,6 +91,7 @@ public class Task4Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task4TxtInput.setVisibility(View.VISIBLE);
+                task4Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
@@ -73,7 +103,7 @@ public class Task4Activity extends AppCompatActivity {
                         task4TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask4Btn.setVisibility(View.VISIBLE);
                     }
-                }, 11000); //set correct time here
+                }, 2000); //set correct time here
             }
         });
 

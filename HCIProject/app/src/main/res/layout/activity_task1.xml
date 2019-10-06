@@ -25,7 +25,7 @@
         android:id="@+id/task1Txt"
         android:layout_width="350dp"
         android:layout_height="145dp"
-        android:text="Insert task 1 text"
+        android:visibility="invisible"
         android:scrollbars="vertical"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -51,6 +51,7 @@
     <Button
         android:id="@+id/continueFromTask1Btn"
         android:visibility="invisible"
+        android:background="@android:color/holo_green_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
@@ -65,7 +66,7 @@
     <TextView
         android:id="@+id/task1Timer"
         android:layout_width="134dp"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
@@ -75,12 +76,13 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task1TitleTxt"
-        app:layout_constraintVertical_bias="0.445" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <Button
         android:id="@+id/startTask1TimerBtn"
         android:layout_width="76dp"
         android:layout_height="48dp"
+        android:background="@android:color/holo_green_light"
         android:text="@string/start"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/continueFromTask1Btn"

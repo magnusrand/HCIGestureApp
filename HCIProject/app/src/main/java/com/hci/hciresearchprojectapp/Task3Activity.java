@@ -23,6 +23,7 @@ import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 public class Task3Activity extends AppCompatActivity {
     private static final int REQ_Task3ToCalm = 114;
     TextView task3Timer;
+    TextView task3Text;
     Button continueFromTask3Btn;
     long endtime = 0;
 
@@ -49,10 +50,37 @@ public class Task3Activity extends AppCompatActivity {
         task3TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task3Text = findViewById(R.id.task3Txt);
-        task3Text.setText("The chill, worming in\n" +
-                "Shock, pleasure, bursting within\n" +
-                "Summer tongue awakes\n"); //Insert Task 3 text
+        task3Text = findViewById(R.id.task3Txt);
+        task3Text.setText("frequently asked questions\n\n" +
+                "round robin scheduling\n\n" +
+                "information super highway\n\n" +
+                "my favorite web browser\n\n" +
+                "the laser printer is jammed\n\n" +
+                "all good boys deserve fudge\n\n" +
+                "the second largest country\n\n" +
+                "call for more details\n\n" +
+                "just in time for the party\n\n" +
+                "have a good weekend\n\n" +
+                "video camera with a zoom lens\n\n" +
+                "what a monkey sees a monkey will do\n\n" +
+                "that is very unfortunate\n\n" +
+                "the back yard of our house\n\n" +
+                "this is a very good idea\n\n" +
+                "reading week is just about here\n\n" +
+                "our fax number has changed\n\n" +
+                "thank you for your help\n\n" +
+                "no exchange without a bill\n\n" +
+                "the early bird gets the worm\n\n" +
+                "buckle up for safety\n\n" +
+                "this is too much to handle\n\n" +
+                "protect your environment\n\n" +
+                "world population is growing\n\n" +
+                "the library is closed today\n\n" +
+                "Mary had a little lamb\n\n" +
+                "teaching services will help\n\n" +
+                "we accept personal checks\n\n" +
+                "this is a non profit organization\n\n" +
+                "user friendly interface"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
 
         task3Text.setMovementMethod(new ScrollingMovementMethod());
         task3Timer = findViewById(R.id.task3Timer);
@@ -63,6 +91,7 @@ public class Task3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Button btn = (Button)v;
                 task3TxtInput.setVisibility(View.VISIBLE);
+                task3Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
@@ -74,7 +103,7 @@ public class Task3Activity extends AppCompatActivity {
                         task3TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask3Btn.setVisibility(View.VISIBLE);
                     }
-                }, 11000); //set correct time here
+                }, 2000); //set correct time here
             }
         });
 

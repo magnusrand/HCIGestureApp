@@ -25,7 +25,7 @@
         android:id="@+id/trainingTxt"
         android:layout_width="350dp"
         android:layout_height="145dp"
-        android:text="Insert training text"
+        android:visibility="invisible"
         android:scrollbars="vertical"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -52,6 +52,7 @@
         android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
         android:text="@string/Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +64,7 @@
     <TextView
         android:id="@+id/trainingTaskTimer"
         android:layout_width="134dp"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
@@ -73,12 +74,13 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TitleTxt"
-        app:layout_constraintVertical_bias="0.445" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <Button
         android:id="@+id/startTrainingTaskTimerBtn"
         android:layout_width="76dp"
         android:layout_height="48dp"
+        android:background="@android:color/holo_green_light"
         android:text="@string/start"
         app:layout_constraintBottom_toTopOf="@+id/ContinueFromTrainingBtn"
         app:layout_constraintEnd_toEndOf="parent"

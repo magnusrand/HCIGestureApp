@@ -23,6 +23,7 @@ import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 public class Task2Activity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
     TextView task2Timer;
+    TextView task2Text;
     Button continueFromTask2Btn;
     long endtime = 0;
 
@@ -49,12 +50,39 @@ public class Task2Activity extends AppCompatActivity {
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
 
-        TextView task2Text = findViewById(R.id.task2Txt);
+        task2Text = findViewById(R.id.task2Txt);
 
         task2Text.setMovementMethod(new ScrollingMovementMethod());
-        task2Text.setText("Like crunchy cornflakes\n" +
-                "Gold leaves rustle underfoot\n" +
-                "Beauty in decay.\n"); //Insert Task 2 text
+        task2Text.setText("but the levee was dry\n\n" +
+                "I took the rover from the shop\n\n" +
+                "movie about a nutty professor\n\n" +
+                "come and see our new car\n\n" +
+                "coming up with killer sound bites\n\n" +
+                "I am going to a music lesson\n\n" +
+                "the opposing team is over there\n\n" +
+                "soon we will return from the city\n\n" +
+                "I am wearing a tie and a jacket\n\n" +
+                "the quick brown fox jumped\n\n" +
+                "all together in one big pile\n\n" +
+                "wear a crown with many jewels\n\n" +
+                "there will be some fog tonight\n\n" +
+                "I am allergic to bees and peanuts\n\n" +
+                "he is still on our team\n\n" +
+                "the dow jones index has risen\n\n" +
+                "my preferred treat is chocolate\n\n" +
+                "the king sends you to the tower\n\n" +
+                "we are subjects and must obey\n\n" +
+                "mom made her a turtleneck\n\n" +
+                "goldilocks and the three bears\n\n" +
+                "we went grocery shopping\n\n" +
+                "the assignment is due today\n\n" +
+                "what you see is what you get\n\n" +
+                "for your information only\n\n" +
+                "a quarter of a century\n\n" +
+                "the store will close at ten\n\n" +
+                "head shoulders knees and toes\n\n" +
+                "vanilla flavored ice cream"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
+
 
         task2Timer = findViewById(R.id.task2Timer);
         Button startTimerBtn = findViewById(R.id.startTask2TimerBtn);
@@ -63,8 +91,9 @@ public class Task2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Button btn = (Button)v;
-
                 task2TxtInput.setVisibility(View.VISIBLE);
+                task2Text.setVisibility(View.VISIBLE);
+
                 endtime = System.currentTimeMillis() + 121000;
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
@@ -76,7 +105,7 @@ public class Task2Activity extends AppCompatActivity {
                         task2TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask2Btn.setVisibility(View.VISIBLE);
                     }
-                }, 11000); //set correct time here
+                }, 2000); //set correct time here
             }
         });
 
