@@ -5,11 +5,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -19,9 +24,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
+import static android.content.ContentValues.TAG;
 
 public class Task1Activity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
+    private Boolean isNotificationDisplayed = false;
+    private int assignedGesture = 0;
     public static Boolean isTapSelected = false,
             isFlickSelected = false,
             isTiltSelected = false,
@@ -32,6 +40,13 @@ public class Task1Activity extends AppCompatActivity {
     long endtime = 0;
 
     CountDownTimer currentTimer;
+
+    // members for gesture detection
+    private SensorManager sm;
+    private Sensor accelerometer;
+    private GestureDetection gDetector = new GestureDetection();
+
+    private AlertDialog alertDialog;
 
     String tempTextTest = "a";
 
@@ -61,22 +76,29 @@ public class Task1Activity extends AppCompatActivity {
             isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
             isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
 
-            if (isFlickSelected) {
-                //Todo: Flick handling
-            }
-
-            if (isShakeSelected) {
-                //Todo: Shake handling
-            }
-
             if (isTapSelected) {
                 //Todo: Tap handling
+                assignedGesture = 0;
             }
-
+            if (isFlickSelected) {
+                //Todo: Flick handling
+                assignedGesture = 1;
+            }
             if (isTiltSelected) {
                 //Todo: Tilt handling
+                assignedGesture = 2;
+            }
+            if (isShakeSelected) {
+                //Todo: Shake handling
+                assignedGesture = 3;
             }
         }
+
+        Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
+        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
         final MultiAutoCompleteTextView task1TxtInput = findViewById(R.id.task1TxtInput);
         task1TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
@@ -158,9 +180,25 @@ public class Task1Activity extends AppCompatActivity {
                 startActivity(continueToCalmPhaseIntent);
             }
         });
-
         //createRandomTimerInSeconds(5,10).start();
     }
+
+    // Create the gesture listener
+    private SensorEventListener sensorListener = new SensorEventListener() {
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            if(isNotificationDisplayed){
+                if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
+                    alertDialog.dismiss();
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
 
     public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
         final int seconds = minSeconds + (int) (Math.random() * (maxSeconds - minSeconds) + 1);
@@ -181,7 +219,7 @@ public class Task1Activity extends AppCompatActivity {
     // Show popup alerts
     private  void showPopup()
     {
-        AlertDialog alertDialog = new AlertDialog.Builder(Task1Activity.this).create();
+        alertDialog = new AlertDialog.Builder(Task1Activity.this).create();
         alertDialog.setTitle("Notification");
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(false);
@@ -197,7 +235,7 @@ public class Task1Activity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-
+        isNotificationDisplayed = true;
     }
 
     private void closeKeyboard() {
