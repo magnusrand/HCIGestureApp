@@ -76,22 +76,14 @@ public class Task1Activity extends AppCompatActivity {
             isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
             isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
 
-            if (isTapSelected) {
-                //Todo: Tap handling
+            if (isTapSelected)
                 assignedGesture = 0;
-            }
-            if (isFlickSelected) {
-                //Todo: Flick handling
+            if (isFlickSelected)
                 assignedGesture = 1;
-            }
-            if (isTiltSelected) {
-                //Todo: Tilt handling
+            if (isTiltSelected)
                 assignedGesture = 2;
-            }
-            if (isShakeSelected) {
-                //Todo: Shake handling
+            if (isShakeSelected)
                 assignedGesture = 3;
-            }
         }
 
         Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
