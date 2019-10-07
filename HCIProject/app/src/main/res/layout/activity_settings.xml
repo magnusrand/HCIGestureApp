@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/shakeOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiltOn" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/tiltOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flickOn" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/flickOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tapOn" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/trainingOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,26 +50,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19999999" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="132dp"
-        android:layout_height="46dp"
+    <TextView
+        android:id="@+id/settingsTitleTxt"
+        android:layout_width="319dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="101dp"
+        android:layout_marginEnd="140dp"
         android:layout_marginStart="139dp"
         android:layout_marginTop="81dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="101dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:textSize="45sp"
         android:text="Configurations"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/trainingOn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/tapOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="Tap"
         app:layout_constraintBottom_toTopOf="@+id/flickOn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

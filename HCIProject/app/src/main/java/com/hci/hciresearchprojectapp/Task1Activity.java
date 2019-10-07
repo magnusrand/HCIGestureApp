@@ -20,6 +20,10 @@ import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task1Activity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
+    public static Boolean isTapSelected = false,
+            isFlickSelected = false,
+            isTiltSelected = false,
+            isShakeSelected = false;
     TextView task1Timer;
     TextView task1Text;
     Button continueFromTask1Btn;
@@ -47,6 +51,28 @@ public class Task1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task1);
 
+        if(getIntent().getExtras() != null) {
+            isFlickSelected = getIntent().getExtras().getBoolean("FlickSelected");
+            isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
+            isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
+            isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
+
+            if (isFlickSelected) {
+                //Todo: Flick handling
+            }
+
+            if (isShakeSelected) {
+                //Todo: Shake handling
+            }
+
+            if (isTapSelected) {
+                //Todo: Tap handling
+            }
+
+            if (isTiltSelected) {
+                //Todo: Tilt handling
+            }
+        }
         final MultiAutoCompleteTextView task1TxtInput = findViewById(R.id.task1TxtInput);
         task1TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
@@ -114,7 +140,11 @@ public class Task1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent continueToCalmPhaseIntent = new Intent(Task1Activity.this, RelaxNResetActivity.class)
-                        .putExtra("RequestCode", REQ_Task1ToCalm);
+                        .putExtra("RequestCode", REQ_Task1ToCalm)
+                        .putExtra("FlickSelected", isFlickSelected)
+                        .putExtra("TapSelected", isTapSelected)
+                        .putExtra("TiltSelected", isTiltSelected)
+                        .putExtra("ShakeSelected", isShakeSelected);
                 startActivity(continueToCalmPhaseIntent);
             }
         });

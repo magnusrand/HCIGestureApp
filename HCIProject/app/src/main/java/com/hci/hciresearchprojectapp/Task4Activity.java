@@ -20,6 +20,11 @@ import android.widget.TextView;
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task4Activity extends AppCompatActivity {
+    public static Boolean isTrainingSelected = false,
+            isTapSelected = false,
+            isFlickSelected = false,
+            isTiltSelected = false,
+            isShakeSelected = false;
     TextView task4Timer;
     TextView task4Text;
     Button continueFromTask4Btn;
@@ -43,6 +48,29 @@ public class Task4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task4);
+
+        if(getIntent().getExtras() != null) {
+        isTrainingSelected = getIntent().getExtras().getBoolean("TrainingSelected");
+        isFlickSelected = getIntent().getExtras().getBoolean("FlickSelected");
+        isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
+        isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
+        isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
+            if (isFlickSelected) {
+                //Todo: Flick handling
+            }
+
+            if (isShakeSelected) {
+                //Todo: Shake handling
+            }
+
+            if (isTapSelected) {
+                //Todo: Tap handling
+            }
+
+            if (isTiltSelected) {
+                //Todo: Tilt handling
+            }
+        }
 
         final MultiAutoCompleteTextView task4TxtInput = findViewById(R.id.task4TxtInput);
         task4TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);

@@ -19,11 +19,14 @@ import java.io.Console;
 import java.util.concurrent.ExecutionException;
 
 public class RelaxNResetActivity extends AppCompatActivity {
-
-    private static final int REQ_TrainingToCalm = 111;
     private static final int REQ_Task1ToCalm = 112;
     private static final int REQ_Task2ToCalm = 113;
     private static final int REQ_Task3ToCalm = 114;
+    public static Boolean isTrainingSelected = false,
+            isTapSelected = false,
+            isFlickSelected = false,
+            isTiltSelected = false,
+            isShakeSelected = false;
     TextView relaxTimer;
     Button nextPhaseBtn;
     ImageView relaxingImgView;
@@ -46,6 +49,13 @@ public class RelaxNResetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relax_nreset);
+
+        if(getIntent().getExtras() != null) {
+            isTrainingSelected = getIntent().getExtras().getBoolean("TrainingSelected");
+            isFlickSelected = getIntent().getExtras().getBoolean("FlickSelected");
+            isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
+            isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
+            isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
 
         relaxTimer = findViewById(R.id.relaxTimer);
         Button startTimerBtn = findViewById(R.id.startRelaxTimerBtn);
@@ -77,24 +87,17 @@ public class RelaxNResetActivity extends AppCompatActivity {
         relaxingImgView = findViewById(R.id.relaxingImg); //Maybe update imgs displayed if even needed.
         nextPhaseBtn = findViewById(R.id.nextPhaseBtn);
 
-
-
         int requestCode = getIntent().getExtras().getInt("RequestCode");
-        if(requestCode == REQ_TrainingToCalm) {
-            nextPhaseBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent task1Intent = new Intent(RelaxNResetActivity.this, Task1Activity.class);
-                    startActivity(task1Intent);
-                    finish();
-                }
-            });
-        }
         if (requestCode == REQ_Task1ToCalm) {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent task2Intent = new Intent(RelaxNResetActivity.this, Task2Activity.class);
+                    Intent task2Intent = new Intent(RelaxNResetActivity.this, Task2Activity.class)
+                            .putExtra("TrainingSelected", isTrainingSelected)
+                            .putExtra("FlickSelected", isFlickSelected)
+                            .putExtra("TapSelected", isTapSelected)
+                            .putExtra("TiltSelected", isTiltSelected)
+                            .putExtra("ShakeSelected", isShakeSelected);
                     startActivity(task2Intent);
                     finish();
                 }
@@ -104,7 +107,12 @@ public class RelaxNResetActivity extends AppCompatActivity {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent task3Intent = new Intent(RelaxNResetActivity.this, Task3Activity.class);
+                    Intent task3Intent = new Intent(RelaxNResetActivity.this, Task3Activity.class)
+                            .putExtra("TrainingSelected", isTrainingSelected)
+                            .putExtra("FlickSelected", isFlickSelected)
+                            .putExtra("TapSelected", isTapSelected)
+                            .putExtra("TiltSelected", isTiltSelected)
+                            .putExtra("ShakeSelected", isShakeSelected);
                     startActivity(task3Intent);
                     finish();
                 }
@@ -114,11 +122,17 @@ public class RelaxNResetActivity extends AppCompatActivity {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent task4Intent = new Intent(RelaxNResetActivity.this, Task4Activity.class);
+                    Intent task4Intent = new Intent(RelaxNResetActivity.this, Task4Activity.class)
+                            .putExtra("TrainingSelected", isTrainingSelected)
+                            .putExtra("FlickSelected", isFlickSelected)
+                            .putExtra("TapSelected", isTapSelected)
+                            .putExtra("TiltSelected", isTiltSelected)
+                            .putExtra("ShakeSelected", isShakeSelected);
                     startActivity(task4Intent);
                     finish();
                 }
             });
+        }
         }
         }
 

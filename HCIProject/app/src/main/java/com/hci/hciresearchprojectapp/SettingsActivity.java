@@ -7,13 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 
 import static android.content.ContentValues.TAG;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private RadioButton trainingBtn, tapBtn, flickBtn, tiltBtn, shakeBtn;
+    private CheckBox trainingBtn, tapBtn, flickBtn, tiltBtn, shakeBtn;
     public static Boolean isTrainingSelected = false,
             isTapSelected = false,
             isFlickSelected = false,
@@ -37,7 +38,12 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveSettings();
-                Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class)
+                        .putExtra("TrainingSelected", isTrainingSelected)
+                        .putExtra("FlickSelected", isFlickSelected)
+                        .putExtra("TapSelected", isTapSelected)
+                        .putExtra("TiltSelected", isTiltSelected)
+                        .putExtra("ShakeSelected", isShakeSelected);
                 startActivity(mainIntent);
                 finish();
             }

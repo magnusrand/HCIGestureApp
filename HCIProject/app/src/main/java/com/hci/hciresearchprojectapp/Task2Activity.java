@@ -22,6 +22,11 @@ import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task2Activity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
+    public static Boolean isTrainingSelected = false,
+            isTapSelected = false,
+            isFlickSelected = false,
+            isTiltSelected = false,
+            isShakeSelected = false;
     TextView task2Timer;
     TextView task2Text;
     Button continueFromTask2Btn;
@@ -46,6 +51,28 @@ public class Task2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task2);
 
+        if(getIntent().getExtras() != null) {
+        isTrainingSelected = getIntent().getExtras().getBoolean("TrainingSelected");
+        isFlickSelected = getIntent().getExtras().getBoolean("FlickSelected");
+        isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
+        isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
+        isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
+            if (isFlickSelected) {
+                //Todo: Flick handling
+            }
+
+            if (isShakeSelected) {
+                //Todo: Shake handling
+            }
+
+            if (isTapSelected) {
+                //Todo: Tap handling
+            }
+
+            if (isTiltSelected) {
+                //Todo: Tilt handling
+            }
+        }
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
@@ -114,7 +141,12 @@ public class Task2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent continueToCalmPhaseIntent = new Intent(Task2Activity.this, RelaxNResetActivity.class)
-                        .putExtra("RequestCode", REQ_Task2ToCalm);
+                        .putExtra("RequestCode", REQ_Task2ToCalm)
+                        .putExtra("TrainingSelected", isTrainingSelected)
+                        .putExtra("FlickSelected", isFlickSelected)
+                        .putExtra("TapSelected", isTapSelected)
+                        .putExtra("TiltSelected", isTiltSelected)
+                        .putExtra("ShakeSelected", isShakeSelected);
                 startActivity(continueToCalmPhaseIntent);
             }
         });
