@@ -8,6 +8,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -36,6 +40,15 @@ public class Task2Activity extends AppCompatActivity {
 
     CountDownTimer currentTimer;
 
+    // members for gesture detection
+    private SensorManager sm;
+    private Sensor accelerometer;
+    private GestureDetection gDetector = new GestureDetection();
+    private int assignedGesture = 0;
+    private Boolean isNotificationDisplayed = false;
+
+    private AlertDialog alertDialog;
+
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
         @Override
@@ -61,21 +74,14 @@ public class Task2Activity extends AppCompatActivity {
         isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
         isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
         isTiltSelected = getIntent().getExtras().getBoolean("TiltSelected");
-            if (isFlickSelected) {
-                //Todo: Flick handling
-            }
-
-            if (isShakeSelected) {
-                //Todo: Shake handling
-            }
-
-            if (isTapSelected) {
-                //Todo: Tap handling
-            }
-
-            if (isTiltSelected) {
-                //Todo: Tilt handling
-            }
+            if (isTapSelected)
+                assignedGesture = 0;
+            if (isFlickSelected)
+                assignedGesture = 1;
+            if (isTiltSelected)
+                assignedGesture = 2;
+            if (isShakeSelected)
+                assignedGesture = 3;
         }
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -161,6 +167,23 @@ public class Task2Activity extends AppCompatActivity {
         });
     }
 
+    // Create the gesture listener
+    private SensorEventListener sensorListener = new SensorEventListener() {
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            if(isNotificationDisplayed){
+                if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
+                    alertDialog.dismiss();
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
+
     public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
         final int seconds = minSeconds + (int) (Math.random() * (maxSeconds - minSeconds) + 1);
         return new CountDownTimer(seconds*1000,1000) {
@@ -180,7 +203,7 @@ public class Task2Activity extends AppCompatActivity {
     // Show popup alerts
     private  void showPopup()
     {
-        AlertDialog alertDialog = new AlertDialog.Builder(Task2Activity.this).create();
+        alertDialog = new AlertDialog.Builder(Task2Activity.this).create();
         alertDialog.setTitle("Notification");
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(false);
@@ -196,7 +219,7 @@ public class Task2Activity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-
+        isNotificationDisplayed = true;
     }
 
     private void closeKeyboard() {
