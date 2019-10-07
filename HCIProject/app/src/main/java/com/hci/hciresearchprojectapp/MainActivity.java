@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
         sm.registerListener(sensorListener , sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 
         Button btn1 = findViewById(R.id.startTrainingBtn);
+        Button settingsButton = findViewById(R.id.settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                finish();
+            }
+        });
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
