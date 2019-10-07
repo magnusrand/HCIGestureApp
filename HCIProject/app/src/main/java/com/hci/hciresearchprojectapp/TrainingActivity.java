@@ -115,6 +115,7 @@ public class TrainingActivity extends AppCompatActivity {
                 finish();
             }
         });
+        showPopup();
     }
 
     private void closeKeyboard() {
@@ -133,5 +134,22 @@ public class TrainingActivity extends AppCompatActivity {
         if(btn != null) {
             btn.setText("start");
         }
+    }
+    
+    // Show popup alerts
+    private  void showPopup()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(TrainingActivity.this).create();
+        alertDialog.setTitle("Notification");
+        alertDialog.setMessage("Dismiss me with the taught gesture" +
+                "");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+
     }
 }
