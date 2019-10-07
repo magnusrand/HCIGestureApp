@@ -8,6 +8,7 @@ import static android.content.ContentValues.TAG;
 
 public class GestureDetection {
 
+    private static Boolean isNotificationDisplayed = false;
     private float oldX = 0.0f, oldY = 0.0f, oldZ = 0.0f;
     private int i = 0;
     private final float delta = 1.0f;
@@ -16,9 +17,11 @@ public class GestureDetection {
     private float[] gravity = new float[3];
     private float[] linear_acceleration = new float[3];
 
+    public void setNotificationFlag(Boolean flag){
+        isNotificationDisplayed = flag;
+    }
 
-
-    public String startGestureDetection(SensorEvent sensorEvent, Boolean isNotificationVisible){
+    public String startGestureDetection(SensorEvent sensorEvent){
 
         String gesture = "";
         gravity[0] = ALPHA * gravity[0] + (1 - ALPHA) * sensorEvent.values[0];
@@ -47,7 +50,7 @@ public class GestureDetection {
                         // Write code here for when phone is tilted left
                         Log.i(TAG, "onSensorChanged: You tilt the device left\n\n\n\n\n\n\n\n");
                     }
-                    if(isNotificationVisible)
+                    if(isNotificationDisplayed)
                         gesture = "RL";
                 }
             } else if(deltaY > delta){
@@ -60,7 +63,7 @@ public class GestureDetection {
                     // Write code here for when phone is tilted down
                     Log.i(TAG, " tilting forward : You tilt the device downs\n\n\n\n\n\n\n\n");
                 }
-                if(isNotificationVisible)
+                if(isNotificationDisplayed)
                     gesture = "UD";
             }
             else if (linearX > (-2) && linearX < (2) && linearY > (-2) && linearY < (2)) {

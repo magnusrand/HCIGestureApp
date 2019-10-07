@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            gDetector.startGestureDetection(sensorEvent, isNotificationVisible);
+            gDetector.startGestureDetection(sensorEvent);
         }
 
         @Override
