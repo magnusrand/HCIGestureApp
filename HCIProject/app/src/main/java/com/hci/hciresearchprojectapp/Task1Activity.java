@@ -143,7 +143,6 @@ public class Task1Activity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                // TODO create notification method here
                 showPopup();
             }
         };

@@ -125,8 +125,6 @@ public class Task4Activity extends AppCompatActivity {
                 finish();
             }
         });
-        // Todo uncomment below to make timer start
-        //createRandomTimerInSeconds(5,10).start();
     }
 
     public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
@@ -140,7 +138,6 @@ public class Task4Activity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                // TODO create notification method here
                 showPopup();
             }
         };
