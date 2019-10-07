@@ -111,9 +111,8 @@ public class TrainingActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(TrainingActivity.this, RelaxNResetActivity.class)
-                        .putExtra("RequestCode", REQ_TrainingToCalm);
-                startActivity(continueToCalmPhaseIntent);
+                Intent returnToStartIntent = new Intent(TrainingActivity.this, MainActivity.class);
+                startActivity(returnToStartIntent);
                 finish();
             }
         });

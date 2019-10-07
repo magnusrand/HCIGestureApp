@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <CheckBox
+        android:id="@+id/shakeOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shake"
+        app:layout_constraintBottom_toTopOf="@+id/configSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiltOn" />
+
+    <CheckBox
+        android:id="@+id/tiltOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tilt"
+        app:layout_constraintBottom_toTopOf="@+id/shakeOn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flickOn" />
+
+    <CheckBox
+        android:id="@+id/flickOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flick"
+        app:layout_constraintBottom_toTopOf="@+id/tiltOn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tapOn" />
+
+    <CheckBox
+        android:id="@+id/trainingOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Training"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <TextView
+        android:id="@+id/settingsTitleTxt"
+        android:layout_width="319dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="101dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="81dp"
+        android:ems="10"
+        android:textSize="45sp"
+        android:text="Configurations"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/trainingOn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/tapOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Tap"
+        app:layout_constraintBottom_toTopOf="@+id/flickOn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trainingOn" />
+
+    <Button
+        android:id="@+id/configSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:background="@android:color/holo_green_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shakeOn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
