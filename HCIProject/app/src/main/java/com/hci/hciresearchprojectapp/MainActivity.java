@@ -15,9 +15,6 @@ import android.hardware.SensorManager;
 
 public class MainActivity extends AppCompatActivity{
 
-    private SensorManager sm;
-    private Sensor accelerometer;
-    private GestureDetection gDetector = new GestureDetection();
     public static Boolean isTrainingSelected = false,
             isTapSelected = false,
             isFlickSelected = false,
@@ -29,9 +26,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
 
         Button btn1 = findViewById(R.id.startTrainingBtn);
         Button settingsButton = findViewById(R.id.settings);
@@ -73,18 +68,4 @@ public class MainActivity extends AppCompatActivity{
                 }
             });
     }
-
-    // Create the gesture listener
-    private SensorEventListener sensorListener = new SensorEventListener() {
-
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            gDetector.startGestureDetection(sensorEvent);
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-
-        }
-    };
 }
