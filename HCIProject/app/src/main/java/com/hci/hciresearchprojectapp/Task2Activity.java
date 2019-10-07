@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,6 +28,8 @@ public class Task2Activity extends AppCompatActivity {
     TextView task2Text;
     Button continueFromTask2Btn;
     long endtime = 0;
+
+    CountDownTimer currentTimer;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
@@ -95,6 +99,10 @@ public class Task2Activity extends AppCompatActivity {
                 task2Text.setVisibility(View.VISIBLE);
 
                 endtime = System.currentTimeMillis() + 121000;
+
+                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer.start();
+
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {
@@ -104,8 +112,9 @@ public class Task2Activity extends AppCompatActivity {
                         closeKeyboard();
                         task2TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask2Btn.setVisibility(View.VISIBLE);
+                        currentTimer.cancel();
                     }
-                }, 2000); //set correct time here
+                }, 20000); //set correct time here
             }
         });
 
@@ -118,13 +127,10 @@ public class Task2Activity extends AppCompatActivity {
                 startActivity(continueToCalmPhaseIntent);
             }
         });
-
-        // Todo uncomment below to make timer start
-        //createRandomTimerInSeconds(5,10).start();
     }
 
     public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
-        final int seconds = minSeconds + (int) (Math.random() * maxSeconds);
+        final int seconds = minSeconds + (int) (Math.random() * (maxSeconds - minSeconds) + 1);
         return new CountDownTimer(seconds*1000,1000) {
             int displayCounter = seconds;
             @Override
@@ -135,8 +141,31 @@ public class Task2Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 // TODO create notification method here
+                showPopup();
             }
         };
+    }
+
+    // Show popup alerts
+    private  void showPopup()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(Task2Activity.this).create();
+        alertDialog.setTitle("Notification");
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Dismiss me with the taught gesture" +
+                "");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        currentTimer = createRandomTimerInSeconds(5,10);
+                        currentTimer.start();
+
+                    }
+                });
+        alertDialog.show();
+
     }
 
     private void closeKeyboard() {

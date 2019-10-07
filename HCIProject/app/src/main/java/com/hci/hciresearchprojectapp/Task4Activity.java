@@ -3,7 +3,9 @@ package com.hci.hciresearchprojectapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,6 +26,8 @@ public class Task4Activity extends AppCompatActivity {
     TextView task4Text;
     Button continueFromTask4Btn;
     long endtime = 0;
+
+    CountDownTimer currentTimer;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
@@ -93,6 +97,10 @@ public class Task4Activity extends AppCompatActivity {
                 task4TxtInput.setVisibility(View.VISIBLE);
                 task4Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
+
+                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer.start();
+
                 timerHandler.postDelayed(timerRunnable, 0);
                 btn.setVisibility(View.INVISIBLE);
                 timerHandler.postDelayed(new Runnable() {
@@ -102,6 +110,7 @@ public class Task4Activity extends AppCompatActivity {
                         closeKeyboard();
                         task4TxtInput.setVisibility(View.INVISIBLE);
                         continueFromTask4Btn.setVisibility(View.VISIBLE);
+                        currentTimer.cancel();
                     }
                 }, 2000); //set correct time here
             }
@@ -121,7 +130,7 @@ public class Task4Activity extends AppCompatActivity {
     }
 
     public CountDownTimer createRandomTimerInSeconds(final int minSeconds, final int maxSeconds) {
-        final int seconds = minSeconds + (int) (Math.random() * maxSeconds);
+        final int seconds = minSeconds + (int) (Math.random() * (maxSeconds - minSeconds) + 1);
         return new CountDownTimer(seconds*1000,1000) {
             int displayCounter = seconds;
             @Override
@@ -132,8 +141,30 @@ public class Task4Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 // TODO create notification method here
+                showPopup();
             }
         };
+    }
+
+    // Show popup alerts
+    private  void showPopup()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(Task4Activity.this).create();
+        alertDialog.setTitle("Notification");
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Dismiss me with the taught gesture" +
+                "");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        currentTimer = createRandomTimerInSeconds(5,10);
+                        currentTimer.start();
+                    }
+                });
+        alertDialog.show();
+
     }
 
     private void closeKeyboard() {
