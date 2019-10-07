@@ -13,7 +13,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private SensorManager sm;
     private Sensor accelerometer;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
         Button btn1 = findViewById(R.id.startTrainingBtn);
         Button settingsButton = findViewById(R.id.settings);
 
@@ -70,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        //sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     // Create the gesture listener
