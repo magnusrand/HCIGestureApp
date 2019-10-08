@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -71,7 +72,7 @@ public class Task1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task1);
 
-        if(getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null) {
             isFlickSelected = getIntent().getExtras().getBoolean("FlickSelected");
             isShakeSelected = getIntent().getExtras().getBoolean("ShakeSelected");
             isTapSelected = getIntent().getExtras().getBoolean("TapSelected");
@@ -87,7 +88,7 @@ public class Task1Activity extends AppCompatActivity {
                 assignedGesture = 3;
         }
         Random rand = new Random();
-        textId = rand.nextInt((3-1)+1)+1;
+        textId = rand.nextInt((3 - 1) + 1) + 1;
         Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -100,7 +101,7 @@ public class Task1Activity extends AppCompatActivity {
         task1Text = findViewById(R.id.task1Txt);
 
         task1Text.setMovementMethod(new ScrollingMovementMethod());
-        switch (textId){
+        switch (textId) {
             case 1:
                 task1Text.setText(getString(R.string.text1));
                 break;
@@ -121,12 +122,12 @@ public class Task1Activity extends AppCompatActivity {
         startTimerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button btn = (Button)v;
+                Button btn = (Button) v;
                 task1TxtInput.setVisibility(View.VISIBLE);
                 task1Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
 
-                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer = createRandomTimerInSeconds(5, 10);
                 currentTimer.start();
 
                 timerHandler.postDelayed(timerRunnable, 0);
@@ -148,13 +149,33 @@ public class Task1Activity extends AppCompatActivity {
         continueFromTask1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(Task1Activity.this, RelaxNResetActivity.class)
-                        .putExtra("RequestCode", REQ_Task1ToCalm)
-                        .putExtra("FlickSelected", isFlickSelected)
-                        .putExtra("TapSelected", isTapSelected)
-                        .putExtra("TiltSelected", isTiltSelected)
-                        .putExtra("ShakeSelected", isShakeSelected);
-                startActivity(continueToCalmPhaseIntent);
+                TextCompare txt = new TextCompare();
+                double score;
+                score = txt.getLevenshteinDistance(task1Text.getText().toString(), task1TxtInput.getText().toString());
+                System.out.println("Your score is: " + score);
+
+                setContentView(R.layout.scorelayout);
+                final Button btnDismiss = findViewById(R.id.buttonDismiss);
+                TextView finalScr = findViewById(R.id.FinalScore);
+                ProgressBar scoreBar = findViewById(R.id.progressBar);
+                scoreBar.setMax(100);
+                scoreBar.setProgress((int) score);
+                String fscore = String.valueOf((int) score);
+                finalScr.setText(fscore + "%");
+                btnDismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent continueToCalmPhaseIntent = new Intent(Task1Activity.this, RelaxNResetActivity.class)
+                                .putExtra("RequestCode", REQ_Task1ToCalm)
+                                .putExtra("FlickSelected", isFlickSelected)
+                                .putExtra("TapSelected", isTapSelected)
+                                .putExtra("TiltSelected", isTiltSelected)
+                                .putExtra("ShakeSelected", isShakeSelected);
+                        startActivity(continueToCalmPhaseIntent);
+                        finish();
+                    }
+                });
+
             }
         });
     }
@@ -207,7 +228,6 @@ public class Task1Activity extends AppCompatActivity {
                         dialog.dismiss();
                         currentTimer = createRandomTimerInSeconds(5,10);
                         currentTimer.start();
-
                     }
                 });
         alertDialog.show();

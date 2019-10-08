@@ -8,12 +8,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
@@ -24,6 +26,10 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
@@ -84,7 +90,7 @@ public class Task2Activity extends AppCompatActivity {
             if (isShakeSelected)
                 assignedGesture = 3;
         }
-        Random rand = new Random();
+        final Random rand = new Random();
         textId = rand.nextInt((3-1)+1)+1;
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -140,17 +146,34 @@ public class Task2Activity extends AppCompatActivity {
         continueFromTask2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent continueToCalmPhaseIntent = new Intent(Task2Activity.this, RelaxNResetActivity.class)
-                        .putExtra("RequestCode", REQ_Task2ToCalm)
-                        .putExtra("TrainingSelected", isTrainingSelected)
-                        .putExtra("FlickSelected", isFlickSelected)
-                        .putExtra("TapSelected", isTapSelected)
-                        .putExtra("TiltSelected", isTiltSelected)
-                        .putExtra("ShakeSelected", isShakeSelected);
-                startActivity(continueToCalmPhaseIntent);
-            }
+                TextCompare txt = new TextCompare();
+                double score;
+                score = txt.getLevenshteinDistance(task2Text.getText().toString(), task2TxtInput.getText().toString());
+                System.out.println("Your score is: " + score);
+
+                setContentView(R.layout.scorelayout);
+                final Button btnDismiss = findViewById(R.id.buttonDismiss);
+                TextView finalScr = findViewById(R.id.FinalScore);
+                ProgressBar scoreBar = findViewById(R.id.progressBar);
+                scoreBar.setMax(100);
+                scoreBar.setProgress((int) score);
+                String fscore = String.valueOf((int) score);
+                finalScr.setText(fscore + "%");
+                btnDismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { ;
+                        Intent continueToCalmPhaseIntent = new Intent(Task2Activity.this, RelaxNResetActivity.class)
+                                .putExtra("RequestCode", REQ_Task2ToCalm)
+                                .putExtra("TrainingSelected", isTrainingSelected)
+                                .putExtra("FlickSelected", isFlickSelected)
+                                .putExtra("TapSelected", isTapSelected)
+                                .putExtra("TiltSelected", isTiltSelected)
+                                .putExtra("ShakeSelected", isShakeSelected);
+                        startActivity(continueToCalmPhaseIntent);
+                        finish();
+                    }
         });
-    }
+    }});}
 
     // Create the gesture listener
     private SensorEventListener sensorListener = new SensorEventListener() {
