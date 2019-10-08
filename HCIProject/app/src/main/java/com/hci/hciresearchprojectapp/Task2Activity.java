@@ -50,9 +50,11 @@ public class Task2Activity extends AppCompatActivity {
     CountDownTimer currentTimer;
 
     // members for gesture detection
+    private SensorManager sm;
+    private Sensor accelerometer;
     private GestureDetection gDetector = new GestureDetection();
-    private int assignedGesture = 0;
     private Boolean isNotificationDisplayed = false;
+    private int assignedGesture = 0;
 
     private AlertDialog alertDialog;
 
@@ -92,6 +94,11 @@ public class Task2Activity extends AppCompatActivity {
         }
         final Random rand = new Random();
         textId = rand.nextInt((3-1)+1)+1;
+
+        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
@@ -169,6 +176,7 @@ public class Task2Activity extends AppCompatActivity {
                                 .putExtra("TapSelected", isTapSelected)
                                 .putExtra("TiltSelected", isTiltSelected)
                                 .putExtra("ShakeSelected", isShakeSelected);
+                        sm.unregisterListener(sensorListener);
                         startActivity(continueToCalmPhaseIntent);
                         finish();
                     }
@@ -182,7 +190,7 @@ public class Task2Activity extends AppCompatActivity {
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
                 if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
-                    alertDialog.dismiss();
+                    dismissAlert();
             }
         }
 
@@ -208,6 +216,12 @@ public class Task2Activity extends AppCompatActivity {
         };
     }
 
+    private void dismissAlert()
+    {
+        alertDialog.dismiss();
+        currentTimer = createRandomTimerInSeconds(5, 10);
+        currentTimer.start();
+    }
     // Show popup alerts
     private  void showPopup()
     {

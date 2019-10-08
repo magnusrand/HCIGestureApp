@@ -31,8 +31,6 @@ import static android.content.ContentValues.TAG;
 
 public class Task1Activity extends AppCompatActivity {
     private static final int REQ_Task1ToCalm = 112;
-    private Boolean isNotificationDisplayed = false;
-    private int assignedGesture = 0;
     public static Boolean isTapSelected = false,
             isFlickSelected = false,
             isTiltSelected = false,
@@ -49,6 +47,8 @@ public class Task1Activity extends AppCompatActivity {
     private SensorManager sm;
     private Sensor accelerometer;
     private GestureDetection gDetector = new GestureDetection();
+    private Boolean isNotificationDisplayed = false;
+    private int assignedGesture = 0;
 
     private AlertDialog alertDialog;
 
@@ -89,7 +89,7 @@ public class Task1Activity extends AppCompatActivity {
         }
         Random rand = new Random();
         textId = rand.nextInt((3 - 1) + 1) + 1;
-        Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
+//        Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -171,6 +171,7 @@ public class Task1Activity extends AppCompatActivity {
                                 .putExtra("TapSelected", isTapSelected)
                                 .putExtra("TiltSelected", isTiltSelected)
                                 .putExtra("ShakeSelected", isShakeSelected);
+                        sm.unregisterListener(sensorListener);
                         startActivity(continueToCalmPhaseIntent);
                         finish();
                     }
@@ -187,7 +188,7 @@ public class Task1Activity extends AppCompatActivity {
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
                 if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
-                    alertDialog.dismiss();
+                    dismissAlert();
             }
         }
 
@@ -213,6 +214,12 @@ public class Task1Activity extends AppCompatActivity {
         };
     }
 
+    private void dismissAlert()
+    {
+        alertDialog.dismiss();
+        currentTimer = createRandomTimerInSeconds(5, 10);
+        currentTimer.start();
+    }
     // Show popup alerts
     private  void showPopup()
     {
@@ -226,7 +233,7 @@ public class Task1Activity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        currentTimer = createRandomTimerInSeconds(5,10);
+                        currentTimer = createRandomTimerInSeconds(5, 10);
                         currentTimer.start();
                     }
                 });
