@@ -80,7 +80,7 @@ public class RelaxNResetActivity extends AppCompatActivity {
                         nextPhaseBtn.setVisibility(View.VISIBLE);
                         voice.stop();
                     }
-                }, 2000); //set correct time here
+                }, 61000); //set correct time here
             }
         });
 
@@ -108,13 +108,6 @@ public class RelaxNResetActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent mainActivityIntent = new Intent(RelaxNResetActivity.this, MainActivity.class);
-         /*           Intent task3Intent = new Intent(RelaxNResetActivity.this, Task3Activity.class)
-                            .putExtra("TrainingSelected", isTrainingSelected)
-                            .putExtra("FlickSelected", isFlickSelected)
-                            .putExtra("TapSelected", isTapSelected)
-                            .putExtra("TiltSelected", isTiltSelected)
-                            .putExtra("ShakeSelected", isShakeSelected);
-                    startActivity(task3Intent);*/
                     startActivity(mainActivityIntent);
                     finish();
                 }
@@ -137,14 +130,4 @@ public class RelaxNResetActivity extends AppCompatActivity {
         }
         }
         }
-
-/*    @Override
-    public void onPause() {
-        super.onPause();
-        timerHandler.removeCallbacks(timerRunnable);
-        Button btn = (Button)findViewById(R.id.startTask1TimerBtn);
-        if(btn != null) {
-            btn.setText("start");
-        }
-    }*/
     }

@@ -98,7 +98,6 @@ public class Task1Activity extends AppCompatActivity {
 
         final MultiAutoCompleteTextView task1TxtInput = findViewById(R.id.task1TxtInput);
         task1TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        //Do some handling with the txt input
 
         task1Text = findViewById(R.id.task1Txt);
 
@@ -129,7 +128,7 @@ public class Task1Activity extends AppCompatActivity {
                 task1Text.setVisibility(View.VISIBLE);
                 endtime = System.currentTimeMillis() + 121000;
 
-                currentTimer = createRandomTimerInSeconds(5, 10);
+                currentTimer = createRandomTimerInSeconds(8, 15);
                 currentTimer.start();
 
                 timerHandler.postDelayed(timerRunnable, 0);
@@ -143,7 +142,7 @@ public class Task1Activity extends AppCompatActivity {
                         continueFromTask1Btn.setVisibility(View.VISIBLE);
                         currentTimer.cancel();
                     }
-                }, 20000);//set correct time here
+                }, 121000);//set correct time here
             }
         });
 
@@ -220,12 +219,6 @@ public class Task1Activity extends AppCompatActivity {
         };
     }
 
-    public void dismissAlert(){
-        alertDialog.dismiss();
-        currentTimer = createRandomTimerInSeconds(5,10);
-        currentTimer.start();
-    }
-
     // Show popup alerts
     private  void showPopup()
     {
@@ -238,18 +231,19 @@ public class Task1Activity extends AppCompatActivity {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer = createRandomTimerInSeconds(8,15);
                 currentTimer.start();
             }
         });
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-//                        currentTimer = createRandomTimerInSeconds(5,10);
-//                        currentTimer.start();
-                    }
-                });
+
+        if(isTapSelected) {
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+        }
         alertDialog.show();
         isNotificationDisplayed = true;
     }
@@ -261,14 +255,4 @@ public class Task1Activity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-/*    @Override
-    public void onPause() {
-        super.onPause();
-        timerHandler.removeCallbacks(timerRunnable);
-        Button btn = (Button)findViewById(R.id.startTask1TimerBtn);
-        if(btn != null) {
-            btn.setText("start");
-        }
-    }*/
 }

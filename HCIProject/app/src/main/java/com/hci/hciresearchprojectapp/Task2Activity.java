@@ -100,7 +100,6 @@ public class Task2Activity extends AppCompatActivity {
 
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        //Do some handling with the txt input
 
         task2Text = findViewById(R.id.task2Txt);
 
@@ -130,7 +129,7 @@ public class Task2Activity extends AppCompatActivity {
 
                 endtime = System.currentTimeMillis() + 121000;
 
-                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer = createRandomTimerInSeconds(4,8);
                 currentTimer.start();
 
                 timerHandler.postDelayed(timerRunnable, 0);
@@ -144,7 +143,7 @@ public class Task2Activity extends AppCompatActivity {
                         continueFromTask2Btn.setVisibility(View.VISIBLE);
                         currentTimer.cancel();
                     }
-                }, 20000); //set correct time here
+                }, 121000); //set correct time here
             }
         });
 
@@ -195,7 +194,7 @@ public class Task2Activity extends AppCompatActivity {
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
                 if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
-                    dismissAlert();
+                    alertDialog.dismiss();
             }
         }
 
@@ -221,12 +220,6 @@ public class Task2Activity extends AppCompatActivity {
         };
     }
 
-    public void dismissAlert(){
-        alertDialog.dismiss();
-//        currentTimer = createRandomTimerInSeconds(5,10);
-//        currentTimer.start();
-    }
-
     // Show popup alerts
     private  void showPopup()
     {
@@ -240,20 +233,19 @@ public class Task2Activity extends AppCompatActivity {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer = createRandomTimerInSeconds(4,8);
                 currentTimer.start();
             }
         });
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-//                        currentTimer = createRandomTimerInSeconds(5,10);
-//                        currentTimer.start();
-
-                    }
-                });
+        if(isTapSelected) {
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+        }
         alertDialog.show();
         isNotificationDisplayed = true;
     }
@@ -265,13 +257,4 @@ public class Task2Activity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-    /*@Override
-    public void onPause() {
-        super.onPause();
-        timerHandler.removeCallbacks(timerRunnable);
-        Button btn = (Button)findViewById(R.id.startTask1TimerBtn);
-        if(btn != null) {
-            btn.setText("start");
-        }
-    }*/
 }
