@@ -187,8 +187,10 @@ public class Task1Activity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
-                if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
+                if(gDetector.startGestureDetection(sensorEvent, assignedGesture)) {
+                    Log.i(TAG, "onSensorChanged: dismissing alert");
                     dismissAlert();
+                }
             }
         }
 
@@ -209,6 +211,7 @@ public class Task1Activity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+                this.cancel();
                 showPopup();
             }
         };

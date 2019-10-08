@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
+import static android.content.ContentValues.TAG;
 
 public class Task2Activity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
@@ -189,8 +191,10 @@ public class Task2Activity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
-                if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
+                if(gDetector.startGestureDetection(sensorEvent, assignedGesture)) {
+                    Log.i(TAG, "onSensorChanged: dismissing alert");
                     dismissAlert();
+                }
             }
         }
 
@@ -211,6 +215,7 @@ public class Task2Activity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+                this.cancel();
                 showPopup();
             }
         };
