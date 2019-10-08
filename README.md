@@ -9,7 +9,7 @@ The study will consist of three parts:
 - A pre-study survey:
 	- Here the participants will be asked questions to figure out their knowledge with smartphones and other related elements to the study
 - An experimantal study:
-	- Here the user will conduct the test unsing the application in this repository. See <Insert title here> for detail on the steps.
+	- Here the user will conduct the test unsing the application in this repository. See "Elaboration of the applications part in the study" for detail on the steps.
 	- This study will measure the participants stress level and typing accuracy for a 2D interaction and a 3D gesture interaction
 - A post-survy:
 	- In this survey, the participant will be asked about their experience they had during the study. They will also be asked to self relfect on their stress level, and argue for which interaction method they prefere
@@ -38,3 +38,10 @@ To sum up, this is the application procedure:
 | Setting Screen  |  Start Screen | Task 1 screen  | Task 1 with keyboard  | Task 1 with displayed notification  | Relaxation screen  | 
 |---|---|---|---|---|---|
 | ![Start Screen](screenshots/home_screen.jpg)  | ![Setting Screen](screenshots/setting_screen.jpg)  | ![Task 1 Screen](screenshots/task_one_no_keyboard.jpg)  |  ![Task 1 Screen with keyboard](screenshots/task_one_keyboard.jpg) | ![Task 1 Notification](screenshots/task_one_notification.jpg)  |  ![Relaxation Screen](screenshots/relaxation_phase.jpg) |
+
+## How to install and set up the application
+### Installation
+This application is made for Android devices running on Andoroid version <Insert version here>. Installing the application to you own Android device is simple. Download the apk form the release page here <TODO insert link> and load it onto the device. Make sure that your device can install applications from third party sources outside the playstore (See information on how [here](https://www.androidpit.com/install-apps-outside-of-google-play)). Then install the application and it will now be available on your device. 
+
+### Setup
+When you open the application you will be prompted with two buttons. To set up the application for a new participant, press the `SETTINGS` button. Inside the screen you are taken to you can choose if you want a training run as well as chosing the gesture that should be recognized for this run. 
