@@ -138,7 +138,7 @@ public class RelaxNResetActivity extends AppCompatActivity {
         }
         }
 
-    @Override
+/*    @Override
     public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
@@ -146,5 +146,5 @@ public class RelaxNResetActivity extends AppCompatActivity {
         if(btn != null) {
             btn.setText("start");
         }
-    }
+    }*/
     }

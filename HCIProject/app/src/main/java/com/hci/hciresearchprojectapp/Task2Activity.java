@@ -19,7 +19,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -34,7 +33,6 @@ import java.io.IOException;
 import java.util.Random;
 
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
-import static android.content.ContentValues.TAG;
 
 public class Task2Activity extends AppCompatActivity {
     private static final int REQ_Task2ToCalm = 113;
@@ -55,8 +53,8 @@ public class Task2Activity extends AppCompatActivity {
     private SensorManager sm;
     private Sensor accelerometer;
     private GestureDetection gDetector = new GestureDetection();
-    private Boolean isNotificationDisplayed = false;
     private int assignedGesture = 0;
+    private Boolean isNotificationDisplayed = false;
 
     private AlertDialog alertDialog;
 
@@ -96,7 +94,6 @@ public class Task2Activity extends AppCompatActivity {
         }
         final Random rand = new Random();
         textId = rand.nextInt((3-1)+1)+1;
-
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sm.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -170,7 +167,7 @@ public class Task2Activity extends AppCompatActivity {
                 finalScr.setText(fscore + "%");
                 btnDismiss.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) { ;
+                    public void onClick(View v) {
                         Intent continueToCalmPhaseIntent = new Intent(Task2Activity.this, RelaxNResetActivity.class)
                                 .putExtra("RequestCode", REQ_Task2ToCalm)
                                 .putExtra("TrainingSelected", isTrainingSelected)
@@ -178,12 +175,18 @@ public class Task2Activity extends AppCompatActivity {
                                 .putExtra("TapSelected", isTapSelected)
                                 .putExtra("TiltSelected", isTiltSelected)
                                 .putExtra("ShakeSelected", isShakeSelected);
-                        sm.unregisterListener(sensorListener);
                         startActivity(continueToCalmPhaseIntent);
                         finish();
                     }
-        });
+            });
     }});}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sm.unregisterListener(sensorListener);
+    }
+
 
     // Create the gesture listener
     private SensorEventListener sensorListener = new SensorEventListener() {
@@ -191,10 +194,8 @@ public class Task2Activity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
-                if(gDetector.startGestureDetection(sensorEvent, assignedGesture)) {
-                    Log.i(TAG, "onSensorChanged: dismissing alert");
-                    dismissAlert();
-                }
+                if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
+                    alertDialog.dismiss();
             }
         }
 
@@ -215,18 +216,11 @@ public class Task2Activity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                this.cancel();
                 showPopup();
             }
         };
     }
 
-    private void dismissAlert()
-    {
-        alertDialog.dismiss();
-        currentTimer = createRandomTimerInSeconds(5, 10);
-        currentTimer.start();
-    }
     // Show popup alerts
     private  void showPopup()
     {
@@ -256,7 +250,7 @@ public class Task2Activity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-    @Override
+    /*@Override
     public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
@@ -264,5 +258,5 @@ public class Task2Activity extends AppCompatActivity {
         if(btn != null) {
             btn.setText("start");
         }
-    }
+    }*/
 }

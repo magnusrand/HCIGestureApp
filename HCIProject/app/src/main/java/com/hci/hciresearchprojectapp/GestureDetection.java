@@ -46,7 +46,7 @@ public class GestureDetection {
         oldY = linearY;
         oldZ = linearZ;
 
-//        Log.i(TAG, "startGestureDetection: linear velocities are " + deltaX + " " + deltaY + " " + deltaZ);
+        Log.i(TAG, "startGestureDetection: linear velocities are " + deltaX + " " + deltaY + " " + deltaZ);
         if (deltaX > deltaY) {
             if((deltaX > tiltDelta) && (assignedGesture == 2))
                 return true;
