@@ -41,7 +41,7 @@ To sum up, this is the application procedure:
 
 ## How to install and set up the application
 ### Installation
-This application is made for Android devices running on Andoroid version <Insert version here>. Installing the application to you own Android device is simple. Download the apk form the release page here <TODO insert link> and load it onto the device. Make sure that your device can install applications from third party sources outside the playstore (See information on how [here](https://www.androidpit.com/install-apps-outside-of-google-play)). Then install the application and it will now be available on your device. 
+This application is made for Android devices running on Android version API 27 and 28. Installing the application to you own Android device is simple. Download the apk form the release page here <TODO insert link> and load it onto the device. Make sure that your device can install applications from third party sources outside the playstore (See information on how [here](https://www.androidpit.com/install-apps-outside-of-google-play)). Then install the application and it will now be available on your device. 
 
 ### Setup
 When you open the application you will be prompted with two buttons. To set up the application for a new participant, press the `SETTINGS` button. Inside the screen you are taken to you can choose if you want a training run as well as chosing the gesture that should be recognized for this run. 
