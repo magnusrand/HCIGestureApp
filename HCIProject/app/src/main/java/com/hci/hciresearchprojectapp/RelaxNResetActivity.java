@@ -107,13 +107,15 @@ public class RelaxNResetActivity extends AppCompatActivity {
             nextPhaseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent task3Intent = new Intent(RelaxNResetActivity.this, Task3Activity.class)
+                    Intent mainActivityIntent = new Intent(RelaxNResetActivity.this, MainActivity.class);
+         /*           Intent task3Intent = new Intent(RelaxNResetActivity.this, Task3Activity.class)
                             .putExtra("TrainingSelected", isTrainingSelected)
                             .putExtra("FlickSelected", isFlickSelected)
                             .putExtra("TapSelected", isTapSelected)
                             .putExtra("TiltSelected", isTiltSelected)
                             .putExtra("ShakeSelected", isShakeSelected);
-                    startActivity(task3Intent);
+                    startActivity(task3Intent);*/
+                    startActivity(mainActivityIntent);
                     finish();
                 }
             });

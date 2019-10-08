@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
@@ -34,6 +36,7 @@ public class Task1Activity extends AppCompatActivity {
             isFlickSelected = false,
             isTiltSelected = false,
             isShakeSelected = false;
+    public int textId = 0;
     TextView task1Timer;
     TextView task1Text;
     Button continueFromTask1Btn;
@@ -47,8 +50,6 @@ public class Task1Activity extends AppCompatActivity {
     private GestureDetection gDetector = new GestureDetection();
 
     private AlertDialog alertDialog;
-
-    String tempTextTest = "a";
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable= new Runnable() {
@@ -85,7 +86,8 @@ public class Task1Activity extends AppCompatActivity {
             if (isShakeSelected)
                 assignedGesture = 3;
         }
-
+        Random rand = new Random();
+        textId = rand.nextInt((3-1)+1)+1;
         Log.i(TAG, "onCreate: assigned gesture is " + assignedGesture);
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -98,36 +100,20 @@ public class Task1Activity extends AppCompatActivity {
         task1Text = findViewById(R.id.task1Txt);
 
         task1Text.setMovementMethod(new ScrollingMovementMethod());
-        task1Text.setText("question that must be answered\n\n" +
-                "beware the ides of March\n\n" +
-                "double double toil and trouble\n\n" +
-                "the power of denial\n\n" +
-                "I agree with you\n\n" +
-                "do not say anything\n\n" +
-                "play it again Sam\n\n" +
-                "the force is with you\n\n" +
-                "you are not a jedi yet\n\n" +
-                "an offer you cannot refuse\n\n" +
-                "are you talking to me\n\n" +
-                "yes you are very smart\n\n" +
-                "all work and no play\n\n" +
-                "hair gel is very greasy\n\n" +
-                "Valium in the economy size\n\n" +
-                "the facts get in the way\n\n" +
-                "the dreamers of dreams\n\n" +
-                "did you have a good time\n\n" +
-                "space is a high priority\n\n" +
-                "you are a wonderful example\n\n" +
-                "do not squander your time\n\n" +
-                "do not drink too much\n\n" +
-                "take a coffee break\n\n" +
-                "popularity is desired by all\n\n" +
-                "the music is better than it sounds\n\n" +
-                "starlight and dewdrop\n\n" +
-                "the living is easy\n\n" +
-                "fish are jumping\n\n" +
-                "the cotton is high\n\n" +
-                "drove my chevy to the levee"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
+        switch (textId){
+            case 1:
+                task1Text.setText(getString(R.string.text1));
+                break;
+            case 2:
+                task1Text.setText(getString(R.string.text2));
+                break;
+            case 3:
+                task1Text.setText(getString(R.string.text3));
+                break;
+            default:
+                task1Text.setText("");
+        }
+
 
         task1Timer = findViewById(R.id.task1Timer);
         Button startTimerBtn = findViewById(R.id.startTask1TimerBtn);
@@ -155,7 +141,6 @@ public class Task1Activity extends AppCompatActivity {
                         currentTimer.cancel();
                     }
                 }, 20000);//set correct time here
-
             }
         });
 
@@ -172,7 +157,6 @@ public class Task1Activity extends AppCompatActivity {
                 startActivity(continueToCalmPhaseIntent);
             }
         });
-        //createRandomTimerInSeconds(5,10).start();
     }
 
     // Create the gesture listener

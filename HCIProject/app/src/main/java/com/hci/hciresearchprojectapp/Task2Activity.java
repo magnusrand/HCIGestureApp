@@ -24,6 +24,8 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Random;
+
 import static com.hci.hciresearchprojectapp.Timer.timerTickUpdateEvent;
 
 public class Task2Activity extends AppCompatActivity {
@@ -33,6 +35,7 @@ public class Task2Activity extends AppCompatActivity {
             isFlickSelected = false,
             isTiltSelected = false,
             isShakeSelected = false;
+    public int textId = 0;
     TextView task2Timer;
     TextView task2Text;
     Button continueFromTask2Btn;
@@ -41,8 +44,6 @@ public class Task2Activity extends AppCompatActivity {
     CountDownTimer currentTimer;
 
     // members for gesture detection
-    private SensorManager sm;
-    private Sensor accelerometer;
     private GestureDetection gDetector = new GestureDetection();
     private int assignedGesture = 0;
     private Boolean isNotificationDisplayed = false;
@@ -83,6 +84,8 @@ public class Task2Activity extends AppCompatActivity {
             if (isShakeSelected)
                 assignedGesture = 3;
         }
+        Random rand = new Random();
+        textId = rand.nextInt((3-1)+1)+1;
         final MultiAutoCompleteTextView task2TxtInput = findViewById(R.id.task2TxtInput);
         task2TxtInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         //Do some handling with the txt input
@@ -90,37 +93,19 @@ public class Task2Activity extends AppCompatActivity {
         task2Text = findViewById(R.id.task2Txt);
 
         task2Text.setMovementMethod(new ScrollingMovementMethod());
-        task2Text.setText("but the levee was dry\n\n" +
-                "I took the rover from the shop\n\n" +
-                "movie about a nutty professor\n\n" +
-                "come and see our new car\n\n" +
-                "coming up with killer sound bites\n\n" +
-                "I am going to a music lesson\n\n" +
-                "the opposing team is over there\n\n" +
-                "soon we will return from the city\n\n" +
-                "I am wearing a tie and a jacket\n\n" +
-                "the quick brown fox jumped\n\n" +
-                "all together in one big pile\n\n" +
-                "wear a crown with many jewels\n\n" +
-                "there will be some fog tonight\n\n" +
-                "I am allergic to bees and peanuts\n\n" +
-                "he is still on our team\n\n" +
-                "the dow jones index has risen\n\n" +
-                "my preferred treat is chocolate\n\n" +
-                "the king sends you to the tower\n\n" +
-                "we are subjects and must obey\n\n" +
-                "mom made her a turtleneck\n\n" +
-                "goldilocks and the three bears\n\n" +
-                "we went grocery shopping\n\n" +
-                "the assignment is due today\n\n" +
-                "what you see is what you get\n\n" +
-                "for your information only\n\n" +
-                "a quarter of a century\n\n" +
-                "the store will close at ten\n\n" +
-                "head shoulders knees and toes\n\n" +
-                "vanilla flavored ice cream"); //Inserted 30 lines from phrases2.txt, to finish would require completing a sentence every 2 sec.
-
-
+        switch (textId){
+            case 1:
+                task2Text.setText(getString(R.string.text4));
+                break;
+            case 2:
+                task2Text.setText(getString(R.string.text5));
+                break;
+            case 3:
+                task2Text.setText(getString(R.string.text6));
+                break;
+            default:
+                task2Text.setText("");
+        }
         task2Timer = findViewById(R.id.task2Timer);
         Button startTimerBtn = findViewById(R.id.startTask2TimerBtn);
         startTimerBtn.setText("start");
