@@ -34,4 +34,7 @@ To sum up, this is the application procedure:
 7. Repeat step 1-6 one more time with a different 3D gesture
 
 ## Screenshots of the application
-![Start Screen](screenshots/home_screen.jpg)
+
+| Setting Screen  |  Start Screen | Task 1 screen  | Task 1 with keyboard  | Task 1 with displayed notification  | Relaxation screen  | 
+|---|---|---|---|---|---|
+| ![Start Screen](screenshots/home_screen.jpg)  | ![Setting Screen](screenshots/setting_screen.jpg)  | ![Task 1 Screen](screenshots/task_one_no_keyboard.jpg)  |  ![Task 1 Screen with keyboard](screenshots/task_one_keyboard.jpg) | ![Task 1 Notification](screenshots/task_one_notification.jpg)  |  ![Relaxation Screen](screenshots/relaxation_phase.jpg) |
