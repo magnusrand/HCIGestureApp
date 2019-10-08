@@ -195,7 +195,7 @@ public class Task2Activity extends AppCompatActivity {
         public void onSensorChanged(SensorEvent sensorEvent) {
             if(isNotificationDisplayed){
                 if(gDetector.startGestureDetection(sensorEvent, assignedGesture))
-                    alertDialog.dismiss();
+                    dismissAlert();
             }
         }
 
@@ -221,6 +221,12 @@ public class Task2Activity extends AppCompatActivity {
         };
     }
 
+    public void dismissAlert(){
+        alertDialog.dismiss();
+//        currentTimer = createRandomTimerInSeconds(5,10);
+//        currentTimer.start();
+    }
+
     // Show popup alerts
     private  void showPopup()
     {
@@ -230,12 +236,21 @@ public class Task2Activity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Dismiss me with the taught gesture" +
                 "");
+
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer.start();
+            }
+        });
+
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        currentTimer = createRandomTimerInSeconds(5,10);
-                        currentTimer.start();
+//                        currentTimer = createRandomTimerInSeconds(5,10);
+//                        currentTimer.start();
 
                     }
                 });

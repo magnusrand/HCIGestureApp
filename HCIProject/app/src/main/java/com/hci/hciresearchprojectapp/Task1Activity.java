@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -218,6 +220,12 @@ public class Task1Activity extends AppCompatActivity {
         };
     }
 
+    public void dismissAlert(){
+        alertDialog.dismiss();
+        currentTimer = createRandomTimerInSeconds(5,10);
+        currentTimer.start();
+    }
+
     // Show popup alerts
     private  void showPopup()
     {
@@ -227,12 +235,19 @@ public class Task1Activity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Dismiss me with the taught gesture" +
                 "");
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                currentTimer = createRandomTimerInSeconds(5,10);
+                currentTimer.start();
+            }
+        });
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        currentTimer = createRandomTimerInSeconds(5,10);
-                        currentTimer.start();
+//                        currentTimer = createRandomTimerInSeconds(5,10);
+//                        currentTimer.start();
                     }
                 });
         alertDialog.show();
